@@ -1,0 +1,946 @@
+%% licence RAFRAB(*)
+%%
+%% RAFRAB : rien à f**tre, rien à battre, fais ce qu'il te plait dans la vie
+%%
+
+
+\documentclass[french]{beamer}
+\usepackage{babel}
+\usepackage[utf8]{inputenc}
+\usetheme{Warsaw}
+
+\title{Introduction à l'administration \\ \textit{d'un système GNU/Linux}}
+\author{}
+\institute{Agence universitaire de la Francophonie}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\section{Généralités}
+\frame{\tableofcontents[current]}
+
+\begin{frame}
+\textbf{Linux est basé sur UNIX}
+    \begin{itemize}
+    \item philosophie
+    \item commandes
+    \item standard et conventions UNIX
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+\textbf{Philosophie UNIX}
+    \begin{itemize}
+    \item Tout est fichier
+    \item Les données sont du texte
+    \item Plus c'est simple, mieux c'est
+    \item Faire une seule chose et bien le faire
+    \item Ecrit en langage C
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+\textbf{Qu'est ce que LINUX?} :
+    \begin{itemize}
+    \item développé par Linus Torvalds en 1991
+    \item de manière stricte, \textbf{Linux} est juste le noyau
+    \item développé par plusieurs personnes gràce à Internet
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+Le système d'exploitation \textbf{GNU/Linux}
+    \begin{itemize}
+    \item \textbf{Multi-tâches}: execution 'simultanée' de plusieurs programme
+    \item \textbf{Multi-utilisateurs}: chaque utilisateur à un login/mdp
+    \item \textbf{libre} : liberté d'éxecuter, de copier, de distribuer, d'étudier, de
+    modifier et d'améliorer
+    \item \textbf{multi-processeurs}: plusieurs processeurs
+    \item \textbf{multi-plateformes}: PC, SPARC, système embarqué, téléphones
+    mobiles
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+\textbf{Distributions Linux} \\
+ensemble cohérent de logiciels assemblé autour du système d'exploitation
+\texttt{GNU} et du noyau \texttt{Linux}
+    \begin{itemize}
+    \item Mandriva 
+    \item RedHat
+    \item Debian
+    \item Ubuntu
+    \item Fedora
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+Pourquoi \texttt{"on"} utilise \textbf{Debian}?
+
+\begin{itemize}
+\item noyau Linux et outils GNU : Debian GNU/Linux
+\item disponible pour 11 architectures
+\item plus de 20000 paquets... avec suivi de sécurité
+\item \url{http://www.debian.org/}
+\item plus de 1000 développeurs officiels (et 2000 contributeurs)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+Les versions de Debian GNU/Linux
+\begin{itemize}
+\item \textit{stable}, \textit{testing} et \textit{unstable} (Sid)
+\item Actuellement : \textit{stable} = Lenny, \textit{testing} = Squeeze
+\item Pour info : \textit{oldstable} = Etch
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\begin{center}
+Installation d'une distribution Linux
+\end{center}
+\end{frame}
+
+\begin{frame}
+Rôles de l'administrateur
+\begin{itemize}
+\item Créer, modifier, supprimer un utilisateur
+\item Gérer les fichiers et les disques
+\item Surveiller l'espace disque
+\item Organiser les sauvegardes
+\item Ajout de périphériques
+\item Améliorer les performances du systèmes
+\item Installer de nouveau produits
+\item Veiller à la sécurité du système
+\item Paramétrer le démarrage et l'arrêt du système
+\item Suivre les logs du système
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+Les bonnes pratiques
+\begin{itemize}
+\item Sauvegarder son système
+\item Tenir un journal de bord (opérations d'exploitation)
+\item Agir de manière réversible
+\item Automatiser les procédures
+\item Anticiper les problèmes
+\end{itemize}
+\end{frame}
+
+\section{Les commandes de bases} 
+\frame{\tableofcontents[current]}
+
+\begin{frame}
+\textbf{Shell}: interpréteur de commandes, interface utilisateur et système
+d'exploitation
+    \begin{itemize}
+    \item accès à la machine: login/motdepasse 
+    \item lancement de commandes à partir d'un interpréteur \textit{Shell}
+    \item syntaxe: \textit{prompt\# [commande] [option(s)] [arguments]}
+    \item exemple: \textit{ls -l /home}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+\textbf{Opération sur les répertoires}
+    \begin{itemize}
+    \item \textbf{ls} : lister les répertoires (syntax: \texttt{ls [-options][repertoires]})
+    \item \textbf{mkdir} : création de répertoire (syntax:\texttt{mkdir [-options][nom du répertoire]})
+    \item \textbf{rmdir} : suppression de répertoire (syntax:\texttt{rmdir [-options][nom du répertoire]})
+    \item \textbf{pwd} : afficher le répertoire courant
+    \item \textbf{cd} : changer de répertoire (syntax:\texttt{cd [nom du répertoire]})
+    \item \textbf{du} : espace disque utilisé par le répertoire (syntax:\texttt{du [option][nom du répertoire]})
+    \item \textbf{df} : espace disque occupé (ou libre) sur chaque partition (syntax: \texttt{df [-options][fichier]})
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+\textbf{Opération sur les fichiers}
+    \begin{itemize}
+    \item \textbf{cp} : copier les fichiers ou les répertoires (syntax: \texttt{cp [-options]<source><destination>})
+    \item \textbf{mv} : déplace ou renommer les fichiers ou les répertoires (syntax: \texttt{mv [-options]<source><destination>})
+    \item \textbf{rm} : effacer un fichier (syntax: \texttt{rm [-options][fichier]})
+    \item \textbf{find} : chercher un fichier (syntax: \texttt{find [-répertoire de départ][option][action]})
+    \item \textbf{which} : Montrer le chemin d'accès à une commande (syntax: \texttt{which [nom de pgm]})
+    \item \textbf{less ou more} : afficher à l'écran le contenu d'un fichier text (syntax: \texttt{less [-options]<nom de fichier>})
+    \item \textbf{whereis et locate}: permet de retrouver les emplacements des
+    fichiers
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+\textbf{Les filtres}: commandes qui, à partir d'un flux d'entrées donné,
+effectuent des traitements avant d'afficher un résultat en sortie.
+    \begin{itemize}
+    \item \textbf{cat} : concaténatation d'un fichier et afficher sur la sortie
+    standard. \\
+    \item \textbf{cut}: afficher suivant les options certains champs d'un
+    fichier \\
+    \textit{cut -d : -f1 /etc/passwd}
+    \item \textbf{grep} : cherche une expression dans un fichier \\
+    \textit{grep false /etc/passwd} \\
+    \textit{grep -v root /etc/passwd} \\
+    \item \textbf{sort}: tri ordre croissant
+    \item \textbf{join}: effectue des jointures des lignes de deux fichiers
+    différents dans un même champs. 
+    \item \textbf{paste}: pour fusionner deux fichiers différents en prenant
+    chaque ligne de chaque fichier pour former une nouvelle ligne
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\textbf{Redirections} \\
+    \begin{itemize}
+    \item Entrée standard: descripteur \textbf{0}
+    \item Sortie standard: descripteur \textbf{1}
+    \item Sortie d'erreur standard: descripteur \textbf{2}
+    \item \texttt{echo 'Bonjour Dakar' > hello.txt}
+    Sortie standard et sortie d'erreur redirigé vers un fichier
+    \item \texttt{tail /etc/passwd > fichiersortie 2>\&1 }
+    \item \texttt{tail /etc/passwd >\& fichiersortie 2>1 }
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\textbf{Tubes}
+    \begin{itemize}
+    \item \textbf{pipe} permet que la sortie d'une commande devient l'entrée
+    d'une autre \\
+    ex: \texttt{sort /etc/passwd | head -6}
+    \item \textbf{tee}: recopie la sortie dans un fichier \\et affiche en même
+    temps le résultat sur la sortie standard \\
+    ex: \texttt{ls -l /etc | tee fichier | wc  -l}
+    \item \textbf{xargs} passe en argument d'une commande les flux reçus en
+    entrée\\
+    ex: \texttt{cat lefichier | xargs ls}
+
+    \end{itemize}
+\end{frame}
+
+
+\section{Utilisation de l'editeur de fichiers}
+\frame{\tableofcontents[current]}
+
+
+\begin{frame}
+\textbf{Vi\texttt(Visual Editor)} 
+est un éditeur de texte, présent sur toutes les version de linux. \\
+Il existe le mode \textit{édition} et le mode \textit{commande} \\
+Pour ajout et suppression :
+\begin{itemize}
+    \item \textbf{insertion} : \texttt{Esc + i} 
+    \item \textbf{suppression} : caractère \texttt{Esc + x} ou d'une ligne \texttt{Esc + d + d}
+    \item \textbf{copier} : \textit{Esc + y + y} 
+    \item \textbf{coller} : \textit{Esc + p} 
+    \item \textbf{annuler} : \textit{u} 
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \begin{itemize}
+    \item \textbf{rechercher}: \textit{Esc + /text\_rechercher}
+    \item \textbf{substitue}:
+    \textit{ligne\_debut,ligne\_fins/chaine1/chaine2/g} sans confirmation \\
+    \textit{ligne\_debut,ligne\_fins/chaine1/chaine2/g} avec confirmation \\
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \begin{itemize}
+    \item \textbf{sauvegarder} : \textit{Esc} + \textit{:} + \textit{w} 
+    \item \textbf{sauvegarder et quitter} : \textit{Esc} + \textit{:} +
+    \textit{w} + \textit{q} 
+    \item \textbf{quitter sans sauvegarder} : \textit{Esc} + \textit{:} +
+    \textit{q} + \textit{!} 
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+Travaux pratiques
+\end{center}
+\end{frame}
+
+\section{Administrer son système}
+\frame{\tableofcontents[current]}
+
+
+\begin{frame}
+\textbf{Utilisateur et groupe}
+    \begin{itemize}
+    \item tout ce qui utilise une machine linux est un \texttt{utilisateur}
+    \item les utilisateurs ont diffèrents privilèges
+    \item les utilisateurs peuvent appartenir à des groupes
+    \item à chaque utilisateur son répertoire de base (ex: \texttt{/home/toto})
+    \item seul l'utilisateur a les droits sur son répértoire
+    \item chaque utilisateur est identifié par un \texttt{UID} (User IDentificator)
+    \item \texttt{su} : permet de changer d'utilisateur
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+\textbf{Le Superutilisateur: Root}
+    \begin{itemize}
+    \item Chaque système Linux a un utilisateur \texttt{root}
+    \item \texttt{root} est le 'tout-puissant'
+    \item seul \textbf{root} peut \texttt{créer}, \texttt{supprimer},
+    \texttt{modifier} un utilisateur
+    \item le prompt du root se termine souvent par \texttt{\#}
+    \item \texttt{su -} : permet de se connecter en tant que root
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+\textbf{Gestion des droits}
+    \begin{itemize}
+    \item \textbf{chown}: change l'appartenance du fichier ou du répertoire  à
+    un utilisateur\\
+    ex: \texttt{chown [toto] [logfile.txt]}
+    \item \textbf{chgrp}: change l'appartenance du fichier ou du répertoire à
+    un groupe \\
+    ex: \texttt{chgrp [staff] [document.txt]}
+    \item l'option \textbf{-R} permet de changer les droits de manière
+    \texttt{récurssive} \\
+    ex: \texttt{chown -R root /usr/local/share/music} \\
+    ex: \texttt{chown -R toto.www-docs  /www/intranet/user/toto/}
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\textbf{Permission sur les fichiers}
+\begin{itemize}
+\item Les permissions représentent les actions pouvant être affectées aux fichiers
+\item \texttt{Trois} types de permissions pour les fichiers
+\item \textbf{r} et \textbf{x} sont nécessaires à l'éxecution d'un script
+\end{itemize}
+\begin{tabular}{|l|l|l|}
+   \hline
+   \textbf{Permission} & \textbf{Lettre} & \textbf{Description} \\
+   \hline
+   Read & r & Permission de lire les données dans le fichier \\
+   Write & w & Permission d'écrire, trunquer,\\ 
+   & & et d'écraser les données dans le fichier \\
+   Execute & x & Permission d'executer \\
+   & & le contenu du fichier comme un programme\\
+   \hline
+\end{tabular}
+\end{frame}
+
+\begin{frame}
+\textbf{Permission sur les répertoires}
+    \begin{itemize}
+    \item r,w,x ont aussi leur signification sur les répértoires
+    \item Les permissions sur les répertoires sont un petit peu différents
+\end{itemize}
+\begin{tabular}{|l|l|l|}
+    \hline
+    \textbf{Permission} & \textbf{Lettre} & \textbf{Description} \\
+    \hline
+    Read & r & Permission d'avoir la liste du répertoire \\
+    Write & w & Permission de créer, effacer,\\ 
+    & & renommer les fichiers dans le répertoire \\
+    Execute & x & Permission de changer le répertoire, ou  \\
+    & & de l'utiliser comme répertoire intermédiaire \\
+    \hline
+\end{tabular}
+\end{frame}
+
+\begin{frame}
+\textbf{Concept de bases}
+\begin{itemize}
+\item Un fichier a un \textbf{propriétaire} et un \textbf{groupe propriétaire}
+\item Les permissions \texttt{r,w,x} sont spécifiés pour l'utilisateur, le
+groupe d'utilisateur est le reste (les autres)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\textbf{Examen des permissions}
+\begin{itemize}
+\item ls -l \\
+drwxr-x--- 9 toto staff  4096 Oct 12 12:57 accounts \\
+-rw-rw-r-- 1 toto staff 11170 Dec 9 14:11 report.txt
+\item \texttt{d} répertoire, {-} fichier texte
+\item 3 caractères rwx pour les permissions de \textbf{l'utilisateur}
+propriétaire
+\item \texttt{3 caractères rwx} pour les permissions du \textbf{groupe}
+propriétaire
+\item \texttt{3 caractères rwx} pour les permissions des \textbf{autres}
+\end{itemize}
+\texttt{Note: cp -p ou -a préserves les permissions et l'horodotage}
+\end{frame}
+
+\begin{frame}
+\textbf{Changer les permissions des fichiers et des répertoires: chmod }
+\begin{itemize}
+\item les permissions peuvent être changées seulement par son \textbf{propriétaire} ou par le \textbf{superutilisateur}
+\item \texttt{chmod a+x un-programme}
+\item ajoute \textbf{(+)} les permissions d'éxecution \textbf{(x)} pour tous les
+utilisateurs \textbf{(a)} sur le fichier \texttt{un-programme}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\textbf{Spécification des permissions}
+\begin{itemize}
+\item les formats de spécifications:
+\textbf{[ugoa] [+=-] [rwx]}
+\item ajout de permissions: \texttt{u} pour l'utilisateur, \texttt{g} pour le
+groupe, \texttt{o} pour les autres, \texttt{a} pour tout le monde.
+\item \texttt{=} applique la permission au fichier
+\item \texttt{+} ajoute la permission à ceux déjà appliquer
+\item \texttt{-} retire les permissions
+\item La dernière lettre indique laquelle des permissions utilisés \texttt{rwx}
+\item ex: \texttt{chmod -R g+rwx,o+rx repertoire-public}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\textbf{La méthode octale}
+\begin{itemize}
+    \item Les permissions peuvent être affecté grâce à des nombres
+    \begin{tabular}{|l|l|l|l|}
+       \hline
+       & \textbf{Utilisateur} & \textbf{Groupe} & \textbf{Autres} \\
+       \hline
+       Lecture & 400 & 40 & 4 \\
+       Ecriture & 200 & 20 & 2 \\
+       Execution & 100 & 10 & 1 \\
+       \hline
+    \end{tabular}
+    \item \texttt{chmod 664 *.txt}
+    \item \texttt{chmod ug=rw,o=r *.txt}
+    \end{itemize}
+\end{frame}
+
+%\begin{frame}
+%\textbf{Permissions spéciales: Sticky}
+%\begin{itemize}
+%\item Un fichier ne peut être effacé que par son utilisateur dans un répertoire ayant une permission
+%\texttt{sticky} 
+%\item \texttt{ex:   ls -l -d /tmp}
+%\texttt{drwxrwxrwt   30 root root 11264 Dec 21 09:35 /tmp}
+%\item \texttt{chmod +t /data/tmp}
+%\end{itemize}
+%\end{frame}
+%
+%\begin{frame}
+%\textbf{Permissions spéciales: Setgid}
+%\begin{itemize}
+%\item Si un répertoire est \textbf{'setgid'}(set group-id), les fichiers qui y
+%sont crées acquiert les permissions du groupe de ce répertoire
+%\item \texttt{ex:   ls -l -d /data/projects}
+%\texttt{drwxrwsr-x 16 root staff 4096 Oct 19 13:14 /data/projects}
+%\item \texttt{chmod g+s /data/projects}
+%\end{itemize}
+%\end{frame}
+%
+
+
+
+\begin{frame}
+Ajout/suppresion de logiciels depuis\
+\textbf{les sources}
+\begin{block}{Compilation du programme}
+tar zxvf logiciel.tar.gz\\
+cd logiciel\\
+./configure\\
+make\\
+make install\\
+\end{block}
+\begin{block}{Avantages}
+Dernières versions\\
+Logiciel adapté à la plateforme, plus performant\\
+Options supplémentraire\\
+\end{block}
+\end{frame}
+
+
+\begin{frame}
+\begin{center}
+Ajout/suppresion de logiciels par\\
+\textbf{RPM: RPM Package Manager }
+\end{center}
+\begin{block}{YUM: Yellowdog Update Modifer}
+\begin{itemize}
+\item Dépots de paquets \texttt{/etc/yum.repos.d/nomdepot.repo}
+\item \textit{yum update}: met à jour le système 
+\item \textit{yum update yum}: mise à jour après une installation toute fraîche
+\item \textit{yum list kern\*} : recherche un paquet 
+\item \textit{yum remove paquet} : suppression du paquet
+\item \textit{yum --exclude=kern* update} : mise à jour séléctive
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\textbf{Les dépôts}
+\begin{itemize}
+\item \textbf{obligatoires: } Dépôt \texttt{fedora} et dépôts
+\texttt{updates-released}
+\item \textbf{pour les habitués:} \texttt{Dépôt dag, dries, freshrmps, jpackage, adobe,
+rmpforge}
+\item \textbf{pour les experts:} \texttt{Dépôts atrpms, kde-redhat, newrmps,
+remi, drpixel, kwizart}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\begin{center}
+Ajout/suppresion de logiciels par\\
+\textbf{APT : Advanced Package Tool}
+\end{center}
+\begin{itemize}
+\item Dépots de paquets \texttt{/etc/apt/sources.list}
+\item \textit{install} : installation d'un paquet = téléchargement + installation + configuration 
+\item \textit{upgrade} : mise à jour de tous les paquets installés (suivi de sécurité)
+\item Notion de dépendances entre les paquets
+\item APT ne fait pas lui-même l'installation et la configuration, il passe par \texttt{dpkg}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\texttt{aptitude} : le centre de commande APT
+\end{center}
+\begin{itemize}
+\item \texttt{/etc/apt/sources.list} : la configuration des dépôts
+\item \texttt{aptitude update} : lecture des paquets disponibles dans les dépots 
+\item \texttt{aptitude search \textit{motclef}}
+\item \texttt{aptitude show \textit{paquet}}
+\item \texttt{aptitude install \textit{paquet}} 
+\item \texttt{aptitude safe-upgrade} et  \texttt{aptitude full-upgrade}
+\item et aussi : \textit{dpkg -l}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+Les dépôts conseillés :
+\begin{itemize}
+\item dépôts officiels, depuis le miroir le plus proche : \\
+ \texttt{deb \url{http://ftp.fr.debian.org/debian} lenny main}
+\item dépôt de sécurité (obligatoire !) : \\
+ \texttt{deb \url{http://security.debian.org/} lenny/updates main}
+\item dépôts \textit{volatile} : \url{http://volatile.debian.org}
+\item dépôts backports (uniquement en cas de nécessité impérative) : \url{http://www.backports.org}
+\end{itemize}
+NB : les autres dépots ne sont pas toujours dignes de confiance !
+\end{frame}
+
+
+
+\section{Notion de système de fichiers}
+\frame{\tableofcontents[current]}
+
+\begin{frame}
+\begin{center}
+Système de fichiers: façon d'organiser et de stocker une arborescence sur
+un support (disque, disquette, cd ...)
+\end{center}
+    \begin{itemize}
+    \item \texttt{MS-DOS} : FAT16/32 (File allocation Table)
+    \item \texttt{Windows} : FAT16, FAT32, VFAT, NTFS, exFAT(extended FAT)
+    \item \texttt{Linux} : ext2/3/4 (extended File System), HFS, ReiserFS, XFS, ...
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+L'arborescence système :
+    \begin{itemize}
+    \item \texttt{/} : le système de fichier racine doit contenir tout ce qui permet au système de démarrer
+    \item \texttt{/bin}, \texttt{/sbin} : commandes de base 
+    \item \texttt{/lib} : bibliothèques associées 
+    \item \texttt{/etc} : fichiers de configuration
+    \item \texttt{/usr} (\textit{unix system ressources}) : ressources non nécessaires au démarrage
+    \item \texttt{/var} : données variables
+    \item \texttt{/home} : répertoires des utilisateurs
+    \item \texttt{/mnt} et \texttt{/media} : points de montages
+    \item \texttt{/dev} : fichiers correspondants à des périphériques
+    \item \texttt{/tmp} : données temporaires
+    \item Linux : \texttt{/proc} et \texttt{/sys} : systèmes de fichiers virtuels
+    \end{itemize}
+\end{frame}
+
+
+\section{Gestion du disque}
+\frame{\tableofcontents[current]}
+
+\begin{frame}
+Gestion des périphèriques
+\begin{itemize}
+\item Périphériques, disque dur, et partitions gérés sous forme de fichier dans /dev
+\item Chaque périphérique correspond un point de montage
+\item \texttt{/dev/hda} : disque dur maître du cannal IDE 1
+\item \texttt{/dev/hda1} : Première partition du DD IDE 1
+\item \texttt{/dev/hda2} : Deuxième partition du DD IDE 1
+\item \texttt{/dev/hdb} : disque dur esclave du cannal IDE1
+\item \texttt{/dev/sda} : disque dur maitre SATA1
+\item Partitions primaires sont numérotées de 1-4
+\item Partitions logiques sont numérotées à partir de 5
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\textbf{Utiliser fdisk}
+\begin{itemize}
+\item \textbf{fdisk} permet de créer, effacer, et changer les partitions sur
+un disque
+\item ex: \texttt{fdisk /dev/hda}
+\item \textbf{p}: afficher la table de partition
+\item \textbf{n}: crée une nouvelle partition (primaire ou logique)
+\item spécifier la taille de la partition
+\item \textbf{w}: changer la table de partition
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\textbf{Créer un système de fichier avec mkfs}
+\begin{itemize}
+\item \textbf{mkfs} initialise un fichier système sur une nouvelle partition
+\item ex: \texttt{mkfs -t ext3 -c /dev/hda2}
+\item \textbf{t}: applique le système de fichier
+\item \textbf{c}: vérifie les erreurs blocs sur le disque
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\textbf{Montage et démontage}
+\begin{itemize}
+\item \textbf{mount} monte un système de fichier et \textbf{umount} pour démonter
+\item ex: \texttt{mount /dev/sdb3 /mnt/extra} (monte le périphérique
+\texttt{/dev/sdb3} sur le point de montage \texttt{/mnt/extra})
+\item ex: \texttt{mount -t vfat /dev/hdd1 /mnt/windows} (spécifie le point de
+montage)
+\item \texttt{man mount}
+\item ex: \texttt{umount /dev/sdb3 ou umount /mnt/extra} pour démonter le périphérique
+\item il est impossible de démonter un système de fichier \texttt{occupé}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\textbf{Montage automatique}
+\begin{itemize}
+\item \textbf{/etc/fstab} contient les informations des systèmes de fichiers
+contenu de l'administrateur
+\item et qui sont montés au démarrage
+\end{itemize}
+\begin{tabular}{l l l l l l l}
+\texttt{device} & \texttt{mount point} & \texttt{type} &
+\texttt{options} & \texttt{dump} & \texttt{pass-no}\\
+\texttt{/dev/hda3} & /home & /ext4 & defaults & 1 & 2
+\end{tabular}
+\end{frame}
+
+\begin{frame}
+\textbf{fstab}
+\begin{itemize}
+\item \textbf{device}: périphériques à monter
+\item \textbf{mount point}: point de montage
+\item \textbf{type}: système de fichier (ext2,vfat,auto,nfs)
+\item \textbf{options}: noauto(non chargé au démarrage),ro(read-only),users
+\item \textbf{dump}: \texttt{1} (système de fichier normale) ou \texttt{0}
+(système de fichier removeable)
+\item \textbf{pass-no}: \texttt{1} (système de fichier racine), \texttt{0}
+système de fichier non monté au démarrage, \texttt{2} pour les autres systèmes
+de fichier.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\textbf{Maintenir un système de fichier}
+\begin{itemize}
+\item \textbf{df}: affiche le résumé des espaces libre sur la partition
+\item \textbf{du}: affiche les informations de l'espace disque utilisé sur la
+branche d'un répertoire
+\item \textbf{fsck} est un utilistaire qui permet le contôle de l'intégrité des
+partions
+\item \texttt{ex: fsck /dev/sdb3} de préférence sur un système de fichier non
+monté
+\end{itemize}
+\end{frame}
+
+
+\section{La sauvegarde}
+\frame{\tableofcontents[current]}
+
+\begin{frame}
+Pourquoi sauvegardé ?
+\begin{itemize}
+\item Fichier perdu, abimé
+\item Erreur humaine
+\item Crash disque
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\textbf{tar}
+\begin{itemize}
+\item Sauvegarder avec tar : \texttt{tar -cvf nom\_support liste\_fichiers}
+\item Consulter une archive : \texttt{tar -tvf  nom\_support}
+\item Restituer une archive : \texttt{tar -xvf nom\_support (liste\_fichiers)}
+\\
+Compression avec les options \textbf{z} (gzip) et \textbf{j} (bzip2) \\
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+La commande \textbf{cpio} : sauvegarde sur la sortie standard
+\begin{itemize}
+\item   Sauvegarder : \texttt{cpio -ov > nomsupport}\\
+\texttt{ex : find /home/oldaccounts | cpio -ov > /dev/support}
+\item Consulter une archive : \texttt{cpio -itv < nomsupport}
+\item Restituer une archive : \texttt{cpio -iv listefichiers < nomsupport}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+La commande \textbf{dd}: copie physique bloc à bloc
+\begin{itemize}
+\item \texttt{if= le fichier à copier}
+\item \texttt{of= fichier la copie}
+\item \texttt{bs= n}       taille des blocs
+\item \texttt{skip= n}     nombres de blocs sautés en entrée
+\item \texttt{seek= n}     nombres de bloc sautés en sortie
+\item \texttt{count= n}    nombre de bloc copiés
+\item \textit{exemple:} \texttt{dd if=/dev/hda1 of=/dev/sda1}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\textbf{Partimage} : permet de faire l'image d'une partition
+\begin{itemize}
+\item Contrairement a dd, ne prend en compte que les bloc occupés
+\item Possibilité de compression (Gzip ou Bzip2)
+\item Fonctionnement réseau (NFS, mode client serveur)
+\item \textit{exemple:} \texttt{partimage -z1 -o -d save /dev/hda12
+/mnt/backup/redhat-6.2.partimg.gz}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\textbf{Rsync}
+\begin{itemize}
+\item Outil open source permettant la sauvegarde incrémentale
+\item Sauvegarde de fichiers locaux
+\item Copie locale vers une machine distante et inversement
+\item Copie locale vers un serveurs rsync et inversement
+\item \textit{exemple:}{rsync -avF /src/path/ /dest/dir}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+Sauvegarde réseaux
+\begin{itemize}
+\item Avec \textbf{tar}\\
+\texttt{tar -zcf - /some/file | ssh <host> tar -zxf - -C /destination}
+\item Avec \textbf{partimage}\\
+\texttt{partimage -s <host> save /some/partition <file>}
+\item Avec \textbf{scp}\\
+\texttt{scp /some/file [\ more ... ]\ <host>:/destination/file}
+\item Avec \textbf{Rsync}\\
+\texttt{rsync -e ssh /some/file [\ more ... ]\
+<host>:/destination/file}
+
+\end{itemize}
+\end{frame}
+
+
+\section{Gestion de processus} 
+\frame{\tableofcontents[current]}
+
+\begin{frame}
+Gestion des appplications
+\begin{itemize}
+\item \textbf{Application} = ensemble de processus
+\item Processus:\\
+fichier exécutable / des bibliothèques partagées (.so) \\
+un ou plusieurs “threads”
+\item \textbf{Activation} = sh, init, inetd, cron
+\item \textbf{Information} = fichiers de log
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\textbf{Les processus}
+\begin{itemize}
+\item Exécution d'une commande : création d'un processus
+\item Attribution d'un PID unique
+\item Différents états (actif, en attente, ...)
+\item Associés à un compte utilisateur, à un ou plusieurs groupes
+\item Création d'un processus via la primitive "fork", "exec"
+\item Référence du père : PPID
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\textbf{L'environnement} \\
+Le fils hérite de son père:
+\begin{itemize}
+\item le répertoire courant
+\item le umask
+\item le ulimit
+\item variables d'environement
+\item le répertoire racine (modification via « chroot »)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\textbf{Gestion des processus}
+\begin{itemize}
+\item ps, top, pstree : lister les processus
+\item kill, killall : envoyer des signaux a des processus
+\item strace : lister les appels système
+\item lsof : lister les fichiers ouverts
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\textbf{cron}
+\begin{itemize}
+\item Exécution périodique de commandes
+\item Fichier /etc/crontab
+\item Répertoire /etc/cron.* (hourly, daily, weekly, montly)
+\end{itemize}
+\texttt{17 * * * * root run-parts --report /etc/cron.hourly}
+\end{frame}
+
+
+\begin{frame}
+\textbf{cron}
+\begin{itemize}
+\item Limitation des utilisateurs via les fichiers\\
+/etc/cron.allow\\
+/etc/cron.deny\\
+(Si non présent : soit root soit tout le monde)\\
+\item   Commande crontab : \\
+\texttt{crontab fichier} soumission d'une table cron \\
+\texttt{crontab -l}: visualisation des tables actives \\
+\texttt{crontab -r}: arrêt de l'exécution de la table active \\
+\texttt{crontab -e}: modification de la table active \\
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\textbf{Le syslog}
+\begin{itemize}
+
+\item Démon syslogd
+\item Reçoit les messages d'erreur émis par le noyau / certains services
+\item Permet de choisir la destination des log (fichiers, machine distante)
+\item Différents critères : origine / sévérité
+\item Fichier de configuration : \texttt{etc/syslog.conf}
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{block}{/etc/syslog.conf}
+\begin{tabular}{l l l}
+user.notice  & & -/var/log/user.log \\
+*.*       &    &  @log.exemple.com \\
+daemon.*  &    &      -/var/log/syslog \\
+lpr.!*   & &  /dev/xconsole \\ 
+*.crit;kern.none   &     &    * \\
+mail.info  & & root \\
+*.=debug   &  & /dev/tty8   \\
+\end{tabular}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\begin{block}{Les sous systèmes}
+\begin{tabular}{l l l}
+authpriv   & &    service de sécurité et d'authentification\\
+cron  &  &        service cron \\
+daemon  &  &      les démons système\\
+kern  &   &      noyau \\
+syslog  &  &     lui-même\\
+user  &   &      processus utilisateurs\\
+lpr, ftp, mail, news, ...\\ & &
+\end{tabular}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\begin{block}{Les niveaux de sévérité}
+\begin{tabular}{l l l}
+emerg & & système inutilisable \\
+alert & & intervention immédiate\\
+crit & & erreur critique\\
+err & & erreur\\
+warn & & avertissement \\ 
+notice & & événement normal \\
+info & & information \\
+debug & & test, mise au point \\
+none & & ignorer les messages \\
+\end{tabular}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\begin{block}{Syntaxe des actions}
+\begin{itemize}
+\item ajouter le message à un fichier \texttt{(/var/log/message)}
+\item envoyer le message à un serveur syslog \texttt{(@log.sn.auf)}
+\item envoyer le message dans un tube nommé préexistant \texttt{(|/dev/xconsole)}
+\item evoyer le message aux utilisateurs qui sont connecté \texttt{(root,roger)}
+\item écrire sur la console texte \texttt{(/dev/tty8)}
+\end{itemize}
+\end{block}
+\end{frame}
+
+
+
+\section{Documentation} 
+\frame{\tableofcontents[current]}
+
+\begin{frame}
+Sur le système, les pages de \texttt{man}
+\begin{itemize}
+    \item le format d'une page de manuel : \texttt{NAME}, \texttt{SYNOPSIS}, \texttt{DESCRIPTION},  \texttt{OPTIONS}, \texttt{FILES}, \texttt{SEE ALSO}, \texttt{BUGS}, ...
+    \item \texttt{man man} : les différentes sections. En cas d'ambiguité, on précise : \texttt{man 1 crontab} ou \texttt{man 5 crontab}
+    \item \texttt{whatis} et \texttt{apropos}
+    \item en français : paquet \texttt{manpages-fr}
+    \item le système \texttt{info}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+Sur le web : à boire et à manger !
+    \begin{itemize}
+    \item Les grands sites de documentations \textbf{validées} : \url{tldp.org}
+    et \texttt{traduc.org}, \url{linux-france.fr}, \url{framabook.org}, 
+    \item Les sites «constructeurs» : \url{www.debian.org},
+    \url{help.ubuntu.com}, \url{fedoraproject.org}, \url{www.redhat.com}
+    \item Les sites des logiciels : \url{www.apache.org}, \url{www.php.net}, ...
+    \item Attention : aux sites \textit{wiki} publics, aux forums (par mail, sur le web ou sur les news), aux blogs et autres sites personels.
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+Au secours je suis perdu, aidez moi !
+    \begin{itemize}
+    \item Comment poser les questions de manière intelligente
+    \item \url{http://www.linux-france.org/article/these/smart-questions/smart-questions-fr.html}
+    \end{itemize}
+\end{frame}
+
+
+
+
+\end{document}
