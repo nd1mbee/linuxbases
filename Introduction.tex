@@ -32,31 +32,20 @@
 \end{frame}
 
 \begin{frame}
-\textbf{Philosophie UNIX}
-    \begin{itemize}
-    \item Tout est fichier
-    \item Les données sont du texte
-    \item Plus c'est simple, mieux c'est
-    \item Faire une seule chose et bien le faire
-    \item Ecrit en langage C
-    \end{itemize}
-\end{frame}
-
-\begin{frame}
-\textbf{Qu'est ce que LINUX?} :
+\textbf{Le noyau LINUX?} :
     \begin{itemize}
     \item développé par Linus Torvalds en 1991
-    \item de manière stricte, \textbf{Linux} est juste le noyau
-    \item développé par plusieurs personnes gràce à Internet
+    \item interface entre le matériel et les applications, les droits d'accès
+    \item gère la mémoire, les périphériques 
     \end{itemize}
 \end{frame}
 
 \begin{frame}
 Le système d'exploitation \textbf{GNU/Linux}
     \begin{itemize}
-    \item \textbf{Multi-tâches}: execution 'simultanée' de plusieurs programme
+    \item \textbf{Multi-tâches}: execution 'simultanée' de plusieurs programmes
     \item \textbf{Multi-utilisateurs}: chaque utilisateur à un login/mdp
-    \item \textbf{libre} : liberté d'éxecuter, de copier, de distribuer, d'étudier, de
+    \item \textbf{libre} : liberté d'éxecuter, de copier, de redistribuer, d'étudier, de
     modifier et d'améliorer
     \item \textbf{multi-processeurs}: plusieurs processeurs
     \item \textbf{multi-plateformes}: PC, SPARC, système embarqué, téléphones
@@ -82,19 +71,19 @@ Pourquoi \texttt{"on"} utilise \textbf{Debian}?
 
 \begin{itemize}
 \item noyau Linux et outils GNU : Debian GNU/Linux
-\item disponible pour 11 architectures
-\item plus de 20000 paquets... avec suivi de sécurité
-\item \url{http://www.debian.org/}
-\item plus de 1000 développeurs officiels (et 2000 contributeurs)
+\item système de gestion de paquets avec plus de 20000 paquets... avec suivi de sécurité
+\item \textit{stabilité}: plus de 1000 développeurs officiels (et 2000 contributeurs)
+\item disponible pour 11 architectures \url{http://www.debian.org/releases/stable/releasenotes}
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 Les versions de Debian GNU/Linux
 \begin{itemize}
-\item \textit{stable}, \textit{testing} et \textit{unstable} (Sid)
-\item Actuellement : \textit{stable} = Lenny, \textit{testing} = Squeeze
-\item Pour info : \textit{oldstable} = Etch
+\item \url http://www.debian.org/releases/ 
+\item \textit{stable} contient la dernière distribution officiellement sortie de Debian (squeeze)
+\item \textit{testing} contient les paquets qui n'ont pas encore été acceptés dans la distribution stable, mais qui sont en attente de l'être. (wheezy)
+\textit{unstable}  est celle sur laquelle les activités de développement se déroulent (Sid)
 \end{itemize}
 \end{frame}
 
@@ -102,7 +91,235 @@ Les versions de Debian GNU/Linux
 \begin{frame}
 \begin{center}
 Installation d'une distribution Linux
+\begin{itemize}
+\item régler la séquence de boot sur le réseau
+\item taper squeeze
+\item choisier la langue du clavier 
+\item partitionnement
+\end{itemize}
 \end{center}
+\end{frame}
+
+
+\section{Notion de système de fichiers}
+\frame{\tableofcontents[current]}
+
+\begin{frame}
+\begin{center}
+Système de fichiers: façon d'organiser et de stocker une arborescence sur
+un support (disque, disquette, cd ...)
+\end{center}
+    \begin{itemize}
+    \item \texttt{MS-DOS} : FAT16/32 (File allocation Table)
+    \item \texttt{Windows} : FAT16, FAT32, VFAT, NTFS, exFAT(extended FAT)
+    \item \texttt{Linux} : ext2/3/4 (extended File System), HFS, ReiserFS, XFS, ...
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+L'arborescence système :
+    \begin{itemize}
+    \item \texttt{/} : répertoire racine doit contenir tout ce qui permet au système de démarrer
+    \item \texttt{/bin}, \texttt{/sbin} : contenant les exécutables de base (ex: cp, mv, ls)
+    \item \texttt{/lib} : bibliothèques associées 
+    \item \texttt{/etc} : continent les fichiers de configuration du système
+    \item \texttt{/usr} (\textit{unix system ressources}) : ressources non nécessaires au démarrage contenant des programmes, documentation
+    \item \texttt{/var} : repertoires des données variables (ex: logs)
+    \item \texttt{/home} : répertoires des utilisateurs
+    \item \texttt{/mnt} et \texttt{/media} : points de montages
+    \item \texttt{/dev} : fichiers spéciaux nommés \texttt{device} correspondants à des périphériques
+    \item \texttt{/tmp} : données temporaires
+    \item Linux : \texttt{/proc} et \texttt{/sys} : systèmes de fichiers virtuels
+    \end{itemize}
+\end{frame}
+
+\section{Gestion du disque}
+\frame{\tableofcontents[current]}
+
+\begin{frame}
+Gestion des périphèriques
+\begin{itemize}
+\item Périphériques, disque dur, et partitions gérés sous forme de fichier dans /dev
+\item Chaque périphérique correspond un point de montage
+\item \texttt{/dev/hda} : disque dur maître du cannal IDE 1
+\item \texttt{/dev/hda1} : Première partition du DD IDE 1
+\item \texttt{/dev/hda2} : Deuxième partition du DD IDE 1
+\item \texttt{/dev/hdb} : disque dur esclave du cannal IDE1
+\item \texttt{/dev/sda} : disque dur maitre SATA1
+\item Partitions primaires sont numérotées de 1-4
+\item Partitions logiques sont numérotées à partir de 5-20
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\textbf{Utiliser fdisk}
+\begin{itemize}
+\item \textbf{fdisk} permet de créer, effacer, et changer les partitions sur
+un disque
+\item ex: \texttt{fdisk /dev/hda}
+\item \textbf{p}: afficher la table de partition
+\item \textbf{n}: crée une nouvelle partition (primaire ou logique)
+\item spécifier la taille de la partition
+\item \textbf{w}: changer la table de partition
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\textbf{Créer un système de fichier avec mkfs}
+\begin{itemize}
+\item \textbf{mkfs} initialise un fichier système sur une nouvelle partition
+\item ex: \texttt{mkfs -t ext3 -c /dev/hda2}
+\item \textbf{t}: applique le système de fichier
+\item \textbf{c}: vérifie les erreurs blocs sur le disque
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\textbf{Montage et démontage}
+\begin{itemize}
+\item \textbf{mount} monte un système de fichier et \textbf{umount} pour démonter
+\item ex: \texttt{mount /dev/sdb3 /mnt/extra} (monte le périphérique
+\texttt{/dev/sdb3} sur le point de montage \texttt{/mnt/extra})
+\item ex: \texttt{mount -t vfat /dev/hdd1 /mnt/windows} (spécifie le point de
+montage)
+\item \texttt{man mount}
+\item ex: \texttt{umount /dev/sdb3 ou umount /mnt/extra} pour démonter le périphérique
+\item il est impossible de démonter un système de fichier \texttt{occupé}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\textbf{Montage automatique}
+\begin{itemize}
+\item \textbf{/etc/fstab} contient les informations des systèmes de fichiers
+contenu de l'administrateur
+\item et qui sont montés au démarrage
+\end{itemize}
+\begin{tabular}{l l l l l l l}
+\texttt{device} & \texttt{mount point} & \texttt{type} &
+\texttt{options} & \texttt{dump} & \texttt{pass-no}\\
+\texttt{/dev/hda3} & /home & /ext4 & defaults & 1 & 2
+\end{tabular}
+\end{frame}
+
+\begin{frame}
+\textbf{fstab}
+\begin{itemize}
+\item \textbf{device}: périphériques à monter
+\item \textbf{mount point}: point de montage
+\item \textbf{type}: système de fichier (ext2,vfat,auto,nfs)
+\item \textbf{options}: noauto(non chargé au démarrage),ro(read-only),users
+\item \textbf{dump}: \texttt{1} (système de fichier normale) ou \texttt{0}
+(système de fichier removeable)
+\item \textbf{pass-no}: \texttt{1} (système de fichier racine), \texttt{0}
+système de fichier non monté au démarrage, \texttt{2} pour les autres systèmes
+de fichier.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\textbf{Maintenir un système de fichier}
+\begin{itemize}
+\item \textbf{df}: affiche le résumé des espaces libre sur la partition
+\item \textbf{du}: affiche les informations de l'espace disque utilisé sur la
+branche d'un répertoire
+\item \textbf{fsck} est un utilistaire qui permet le contôle de l'intégrité des
+partions
+\item \texttt{ex: fsck /dev/sdb3} de préférence sur un système de fichier non
+monté
+\end{itemize}
+\end{frame}
+
+\section{Installation de logiciels}
+\begin{frame}
+Ajout/suppresion de logiciels depuis\
+\textbf{les sources}
+\begin{block}{Compilation du programme}
+tar zxvf logiciel.tar.gz\\
+cd logiciel\\
+./configure\\
+make\\
+make install\\
+\end{block}
+\begin{block}{Avantages}
+Dernières versions\\
+Logiciel adapté à la plateforme, plus performant\\
+Options supplémentraire\\
+\end{block}
+\end{frame}
+
+
+\begin{frame}
+\begin{center}
+Ajout/suppresion de logiciels par\\
+\textbf{RPM: RPM Package Manager }
+\end{center}
+\begin{block}{YUM: Yellowdog Update Modifer}
+\begin{itemize}
+\item Dépots de paquets \texttt{/etc/yum.repos.d/nomdepot.repo}
+\item \textit{yum update}: met à jour le système 
+\item \textit{yum update yum}: mise à jour après une installation toute fraîche
+\item \textit{yum list kern\*} : recherche un paquet 
+\item \textit{yum remove paquet} : suppression du paquet
+\item \textit{yum --exclude=kern* update} : mise à jour séléctive
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\textbf{Les dépôts}
+\begin{itemize}
+\item \textbf{obligatoires: } Dépôt \texttt{fedora} et dépôts
+\texttt{updates-released}
+\item \textbf{pour les habitués:} \texttt{Dépôt dag, dries, freshrmps, jpackage, adobe,
+rmpforge}
+\item \textbf{pour les experts:} \texttt{Dépôts atrpms, kde-redhat, newrmps,
+remi, drpixel, kwizart}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\begin{center}
+Ajout/suppresion de logiciels par\\
+\textbf{APT : Advanced Package Tool}
+\end{center}
+\begin{itemize}
+\item Dépots de paquets \texttt{/etc/apt/sources.list}
+\item \textit{install} : installation d'un paquet = téléchargement + installation + configuration 
+\item \textit{upgrade} : mise à jour de tous les paquets installés (suivi de sécurité)
+\item Notion de dépendances entre les paquets
+\item APT ne fait pas lui-même l'installation et la configuration, il passe par \texttt{dpkg}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\texttt{aptitude} : le centre de commande APT
+\end{center}
+\begin{itemize}
+\item \texttt{/etc/apt/sources.list} : la configuration des dépôts
+\item \texttt{aptitude update} : lecture des paquets disponibles dans les dépots 
+\item \texttt{aptitude search \textit{motclef}}
+\item \texttt{aptitude show \textit{paquet}}
+\item \texttt{aptitude install \textit{paquet}} 
+\item \texttt{aptitude safe-upgrade} et  \texttt{aptitude full-upgrade}
+\item et aussi : \textit{dpkg -l}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+Les dépôts conseillés :
+\begin{itemize}
+\item dépôts officiels, depuis le miroir le plus proche : \\
+ \texttt{deb \url{http://ftp.fr.debian.org/debian} lenny main}
+\item dépôt de sécurité (obligatoire !) : \\
+ \texttt{deb \url{http://security.debian.org/} lenny/updates main}
+\item dépôts \textit{volatile} : \url{http://volatile.debian.org}
+\item dépôts backports (uniquement en cas de nécessité impérative) : \url{http://www.backports.org}
+\end{itemize}
+NB : les autres dépots ne sont pas toujours dignes de confiance !
 \end{frame}
 
 \begin{frame}
@@ -446,228 +663,11 @@ groupe, \texttt{o} pour les autres, \texttt{a} pour tout le monde.
 
 
 
-\begin{frame}
-Ajout/suppresion de logiciels depuis\
-\textbf{les sources}
-\begin{block}{Compilation du programme}
-tar zxvf logiciel.tar.gz\\
-cd logiciel\\
-./configure\\
-make\\
-make install\\
-\end{block}
-\begin{block}{Avantages}
-Dernières versions\\
-Logiciel adapté à la plateforme, plus performant\\
-Options supplémentraire\\
-\end{block}
-\end{frame}
-
-
-\begin{frame}
-\begin{center}
-Ajout/suppresion de logiciels par\\
-\textbf{RPM: RPM Package Manager }
-\end{center}
-\begin{block}{YUM: Yellowdog Update Modifer}
-\begin{itemize}
-\item Dépots de paquets \texttt{/etc/yum.repos.d/nomdepot.repo}
-\item \textit{yum update}: met à jour le système 
-\item \textit{yum update yum}: mise à jour après une installation toute fraîche
-\item \textit{yum list kern\*} : recherche un paquet 
-\item \textit{yum remove paquet} : suppression du paquet
-\item \textit{yum --exclude=kern* update} : mise à jour séléctive
-\end{itemize}
-\end{block}
-\end{frame}
-
-\begin{frame}
-\textbf{Les dépôts}
-\begin{itemize}
-\item \textbf{obligatoires: } Dépôt \texttt{fedora} et dépôts
-\texttt{updates-released}
-\item \textbf{pour les habitués:} \texttt{Dépôt dag, dries, freshrmps, jpackage, adobe,
-rmpforge}
-\item \textbf{pour les experts:} \texttt{Dépôts atrpms, kde-redhat, newrmps,
-remi, drpixel, kwizart}
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}
-\begin{center}
-Ajout/suppresion de logiciels par\\
-\textbf{APT : Advanced Package Tool}
-\end{center}
-\begin{itemize}
-\item Dépots de paquets \texttt{/etc/apt/sources.list}
-\item \textit{install} : installation d'un paquet = téléchargement + installation + configuration 
-\item \textit{upgrade} : mise à jour de tous les paquets installés (suivi de sécurité)
-\item Notion de dépendances entre les paquets
-\item APT ne fait pas lui-même l'installation et la configuration, il passe par \texttt{dpkg}
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\begin{center}
-\texttt{aptitude} : le centre de commande APT
-\end{center}
-\begin{itemize}
-\item \texttt{/etc/apt/sources.list} : la configuration des dépôts
-\item \texttt{aptitude update} : lecture des paquets disponibles dans les dépots 
-\item \texttt{aptitude search \textit{motclef}}
-\item \texttt{aptitude show \textit{paquet}}
-\item \texttt{aptitude install \textit{paquet}} 
-\item \texttt{aptitude safe-upgrade} et  \texttt{aptitude full-upgrade}
-\item et aussi : \textit{dpkg -l}
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-Les dépôts conseillés :
-\begin{itemize}
-\item dépôts officiels, depuis le miroir le plus proche : \\
- \texttt{deb \url{http://ftp.fr.debian.org/debian} lenny main}
-\item dépôt de sécurité (obligatoire !) : \\
- \texttt{deb \url{http://security.debian.org/} lenny/updates main}
-\item dépôts \textit{volatile} : \url{http://volatile.debian.org}
-\item dépôts backports (uniquement en cas de nécessité impérative) : \url{http://www.backports.org}
-\end{itemize}
-NB : les autres dépots ne sont pas toujours dignes de confiance !
-\end{frame}
 
 
 
-\section{Notion de système de fichiers}
-\frame{\tableofcontents[current]}
-
-\begin{frame}
-\begin{center}
-Système de fichiers: façon d'organiser et de stocker une arborescence sur
-un support (disque, disquette, cd ...)
-\end{center}
-    \begin{itemize}
-    \item \texttt{MS-DOS} : FAT16/32 (File allocation Table)
-    \item \texttt{Windows} : FAT16, FAT32, VFAT, NTFS, exFAT(extended FAT)
-    \item \texttt{Linux} : ext2/3/4 (extended File System), HFS, ReiserFS, XFS, ...
-    \end{itemize}
-\end{frame}
 
 
-\begin{frame}
-L'arborescence système :
-    \begin{itemize}
-    \item \texttt{/} : le système de fichier racine doit contenir tout ce qui permet au système de démarrer
-    \item \texttt{/bin}, \texttt{/sbin} : commandes de base 
-    \item \texttt{/lib} : bibliothèques associées 
-    \item \texttt{/etc} : fichiers de configuration
-    \item \texttt{/usr} (\textit{unix system ressources}) : ressources non nécessaires au démarrage
-    \item \texttt{/var} : données variables
-    \item \texttt{/home} : répertoires des utilisateurs
-    \item \texttt{/mnt} et \texttt{/media} : points de montages
-    \item \texttt{/dev} : fichiers correspondants à des périphériques
-    \item \texttt{/tmp} : données temporaires
-    \item Linux : \texttt{/proc} et \texttt{/sys} : systèmes de fichiers virtuels
-    \end{itemize}
-\end{frame}
-
-
-\section{Gestion du disque}
-\frame{\tableofcontents[current]}
-
-\begin{frame}
-Gestion des périphèriques
-\begin{itemize}
-\item Périphériques, disque dur, et partitions gérés sous forme de fichier dans /dev
-\item Chaque périphérique correspond un point de montage
-\item \texttt{/dev/hda} : disque dur maître du cannal IDE 1
-\item \texttt{/dev/hda1} : Première partition du DD IDE 1
-\item \texttt{/dev/hda2} : Deuxième partition du DD IDE 1
-\item \texttt{/dev/hdb} : disque dur esclave du cannal IDE1
-\item \texttt{/dev/sda} : disque dur maitre SATA1
-\item Partitions primaires sont numérotées de 1-4
-\item Partitions logiques sont numérotées à partir de 5
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\textbf{Utiliser fdisk}
-\begin{itemize}
-\item \textbf{fdisk} permet de créer, effacer, et changer les partitions sur
-un disque
-\item ex: \texttt{fdisk /dev/hda}
-\item \textbf{p}: afficher la table de partition
-\item \textbf{n}: crée une nouvelle partition (primaire ou logique)
-\item spécifier la taille de la partition
-\item \textbf{w}: changer la table de partition
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\textbf{Créer un système de fichier avec mkfs}
-\begin{itemize}
-\item \textbf{mkfs} initialise un fichier système sur une nouvelle partition
-\item ex: \texttt{mkfs -t ext3 -c /dev/hda2}
-\item \textbf{t}: applique le système de fichier
-\item \textbf{c}: vérifie les erreurs blocs sur le disque
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\textbf{Montage et démontage}
-\begin{itemize}
-\item \textbf{mount} monte un système de fichier et \textbf{umount} pour démonter
-\item ex: \texttt{mount /dev/sdb3 /mnt/extra} (monte le périphérique
-\texttt{/dev/sdb3} sur le point de montage \texttt{/mnt/extra})
-\item ex: \texttt{mount -t vfat /dev/hdd1 /mnt/windows} (spécifie le point de
-montage)
-\item \texttt{man mount}
-\item ex: \texttt{umount /dev/sdb3 ou umount /mnt/extra} pour démonter le périphérique
-\item il est impossible de démonter un système de fichier \texttt{occupé}
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\textbf{Montage automatique}
-\begin{itemize}
-\item \textbf{/etc/fstab} contient les informations des systèmes de fichiers
-contenu de l'administrateur
-\item et qui sont montés au démarrage
-\end{itemize}
-\begin{tabular}{l l l l l l l}
-\texttt{device} & \texttt{mount point} & \texttt{type} &
-\texttt{options} & \texttt{dump} & \texttt{pass-no}\\
-\texttt{/dev/hda3} & /home & /ext4 & defaults & 1 & 2
-\end{tabular}
-\end{frame}
-
-\begin{frame}
-\textbf{fstab}
-\begin{itemize}
-\item \textbf{device}: périphériques à monter
-\item \textbf{mount point}: point de montage
-\item \textbf{type}: système de fichier (ext2,vfat,auto,nfs)
-\item \textbf{options}: noauto(non chargé au démarrage),ro(read-only),users
-\item \textbf{dump}: \texttt{1} (système de fichier normale) ou \texttt{0}
-(système de fichier removeable)
-\item \textbf{pass-no}: \texttt{1} (système de fichier racine), \texttt{0}
-système de fichier non monté au démarrage, \texttt{2} pour les autres systèmes
-de fichier.
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\textbf{Maintenir un système de fichier}
-\begin{itemize}
-\item \textbf{df}: affiche le résumé des espaces libre sur la partition
-\item \textbf{du}: affiche les informations de l'espace disque utilisé sur la
-branche d'un répertoire
-\item \textbf{fsck} est un utilistaire qui permet le contôle de l'intégrité des
-partions
-\item \texttt{ex: fsck /dev/sdb3} de préférence sur un système de fichier non
-monté
-\end{itemize}
-\end{frame}
 
 
 \section{La sauvegarde}
