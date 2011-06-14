@@ -22,26 +22,59 @@
 \section{Généralités}
 \frame{\tableofcontents[current]}
 
+%\begin{frame}
+%\textbf{Linux est basé sur UNIX}
+%    \begin{itemize}
+%    \item philosophie
+%    \item commandes
+%    \item standard et conventions UNIX
+%    \end{itemize}
+%\end{frame}
+
+
 \begin{frame}
-\textbf{Linux est basé sur UNIX}
-    \begin{itemize}
-    \item philosophie
-    \item commandes
-    \item standard et conventions UNIX
-    \end{itemize}
+\begin{center}
+\textbf{Rôles de l'administrateur}
+\end{center}
+\begin{itemize}
+\item Créer, modifier, supprimer un utilisateur
+\item Gérer les fichiers et les disques
+\item Surveiller l'espace disque
+\item Organiser les sauvegardes
+\item Ajout de périphériques
+\item Améliorer les performances du systèmes
+\item Intégrer de nouveaux services
+\item Veiller à la sécurité du système
+\item Paramétrer le démarrage et l'arrêt du système
+\item Suivre les logs du système
+\end{itemize}
 \end{frame}
 
 \begin{frame}
-\textbf{Le noyau LINUX?} :
+\begin{center}
+\textbf{Les bonnes pratiques}
+\end{center}
+\begin{itemize}
+\item Sauvegarder son système
+\item Tenir un journal de bord (opérations d'exploitation)
+\item Agir de manière réversible
+\item Automatiser les procédures
+\item Anticiper les problèmes
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\textbf{LINUX} :
     \begin{itemize}
     \item développé par Linus Torvalds en 1991
+    \item au sens strict c'est le noyau ou kernel linux
     \item interface entre le matériel et les applications, les droits d'accès
     \item gère la mémoire, les périphériques 
     \end{itemize}
 \end{frame}
 
 \begin{frame}
-Le système d'exploitation \textbf{GNU/Linux}
+Le système d'exploitation \textbf{GNU/Linux}:
     \begin{itemize}
     \item \textbf{Multi-tâches}: execution 'simultanée' de plusieurs programmes
     \item \textbf{Multi-utilisateurs}: chaque utilisateur à un login/mdp
@@ -67,37 +100,24 @@ ensemble cohérent de logiciels assemblé autour du système d'exploitation
 \end{frame}
 
 \begin{frame}
-Pourquoi \texttt{"on"} utilise \textbf{Debian}?
+Pourquoi \textit{"on"} utilise \textbf{Debian}?
 
 \begin{itemize}
 \item noyau Linux et outils GNU : Debian GNU/Linux
-\item système de gestion de paquets avec plus de 20000 paquets... avec suivi de sécurité
-\item \textit{stabilité}: plus de 1000 développeurs officiels (et 2000 contributeurs)
-\item disponible pour 11 architectures \url{http://www.debian.org/releases/stable/releasenotes}
+\item système de gestion de paquets avec plus de \textbf{20000} paquets... avec suivi de sécurité
+\item \textbf{stabilité}: plus de 1000 développeurs officiels (et 2000 contributeurs)
+\item disponible pour \textbf{11 architectures} 
+\item Pour plus d'infos \url{http://www.debian.org/}
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 Les versions de Debian GNU/Linux
 \begin{itemize}
-\item \url http://www.debian.org/releases/ 
-\item \textit{stable} contient la dernière distribution officiellement sortie de Debian (squeeze)
-\item \textit{testing} contient les paquets qui n'ont pas encore été acceptés dans la distribution stable, mais qui sont en attente de l'être. (wheezy)
-\textit{unstable}  est celle sur laquelle les activités de développement se déroulent (Sid)
+\item \textbf{stable} contient la dernière distribution officiellement sortie de Debian (squeeze)
+\item \textbf{testing} contient les paquets qui n'ont pas encore été acceptés dans la distribution stable, mais qui sont en attente de l'être (wheezy)
+\item \textbf{unstable}  est celle sur laquelle les activités de développement se déroulent (Sid)
 \end{itemize}
-\end{frame}
-
-
-\begin{frame}
-\begin{center}
-Installation d'une distribution Linux
-\begin{itemize}
-\item régler la séquence de boot sur le réseau
-\item taper squeeze
-\item choisier la langue du clavier 
-\item partitionnement
-\end{itemize}
-\end{center}
 \end{frame}
 
 
@@ -110,45 +130,67 @@ Système de fichiers: façon d'organiser et de stocker une arborescence sur
 un support (disque, disquette, cd ...)
 \end{center}
     \begin{itemize}
-    \item \texttt{MS-DOS} : FAT16/32 (File allocation Table)
-    \item \texttt{Windows} : FAT16, FAT32, VFAT, NTFS, exFAT(extended FAT)
-    \item \texttt{Linux} : ext2/3/4 (extended File System), HFS, ReiserFS, XFS, ...
+    \item \textbf{MS-DOS} : FAT16/32 (File allocation Table)
+    \item \textbf{Windows} : FAT16, FAT32, VFAT, NTFS, exFAT(extended FAT)
+    \item \textbf{Linux} : ext2/3/4 (extended File System), HFS, ReiserFS, XFS, swap ...
     \end{itemize}
 \end{frame}
-
 
 \begin{frame}
 L'arborescence système :
     \begin{itemize}
-    \item \texttt{/} : répertoire racine doit contenir tout ce qui permet au système de démarrer
-    \item \texttt{/bin}, \texttt{/sbin} : contenant les exécutables de base (ex: cp, mv, ls)
-    \item \texttt{/lib} : bibliothèques associées 
-    \item \texttt{/etc} : continent les fichiers de configuration du système
-    \item \texttt{/usr} (\textit{unix system ressources}) : ressources non nécessaires au démarrage contenant des programmes, documentation
-    \item \texttt{/var} : repertoires des données variables (ex: logs)
-    \item \texttt{/home} : répertoires des utilisateurs
-    \item \texttt{/mnt} et \texttt{/media} : points de montages
-    \item \texttt{/dev} : fichiers spéciaux nommés \texttt{device} correspondants à des périphériques
-    \item \texttt{/tmp} : données temporaires
-    \item Linux : \texttt{/proc} et \texttt{/sys} : systèmes de fichiers virtuels
+    \item \textbf{/} : répertoire racine doit contenir tout ce qui permet au système de démarrer
+    \item \textbf{/bin}, \textbf{/sbin} : contenant les exécutables de base (ex: cp, mv, ls)
+    \item \textbf{/lib} : bibliothèques associées 
+    \item \textbf{/etc} : contient les fichiers de configuration du système
+    \item \textbf{/usr} (\textit{unix system ressources}) : ressources non nécessaires au démarrage contenant des programmes, documentation
+    \end{itemize}
+ \end{frame}
+ 
+ \begin{frame}
+	\begin{itemize}
+    \item \textbf{/var} : répertoires des données variables (ex: logs)
+    \item \textbf{/home} : répertoires des utilisateurs
+    \item \textbf{/mnt} et \textbf{/media} : points de montages    
+    \item \textbf{/tmp} : données temporaires
+    \item Linux : \textbf{/proc} et \textbf{/sys} : systèmes de fichiers virtuels
+    \item \textbf{/dev} : fichiers spéciaux nommés \texttt{device} correspondants à des périphériques
     \end{itemize}
 \end{frame}
 
-\section{Gestion du disque}
-\frame{\tableofcontents[current]}
-
 \begin{frame}
-Gestion des périphèriques
+\begin{center}
+\textbf{Gestion des périphèriques}
+\end{center}
 \begin{itemize}
-\item Périphériques, disque dur, et partitions gérés sous forme de fichier dans /dev
+\item Périphériques, disques durs, et partitions gérés sous forme de fichier dans /dev
 \item Chaque périphérique correspond un point de montage
-\item \texttt{/dev/hda} : disque dur maître du cannal IDE 1
+\item \textbf{/dev/hda} : disque dur maître du cannal IDE 1
 \item \texttt{/dev/hda1} : Première partition du DD IDE 1
 \item \texttt{/dev/hda2} : Deuxième partition du DD IDE 1
-\item \texttt{/dev/hdb} : disque dur esclave du cannal IDE1
+\item \textbf{/dev/hdb} : disque dur esclave du cannal IDE1
 \item \texttt{/dev/sda} : disque dur maitre SATA1
-\item Partitions primaires sont numérotées de 1-4
-\item Partitions logiques sont numérotées à partir de 5-20
+\item \textbf{Partitions primaires sont numérotées de 1-4}
+\item \textbf{Partitions logiques sont numérotées à partir de 5-20}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+Les périphériques spéciaux
+	\begin{itemize}
+	\item \textbf{/dev/null} : tout ce qui est envoyé à ce périphérique est détruit
+	\item \textbf{/dev/zero} : on peut lire une infinité de zéros depuis ce périphérique
+	\item \textbf{/dev/random} : on peut lire des nombre aléatoires depuis ce périphérique
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+Organisation des partitions sous Linux
+\begin{itemize}
+\item assurer une meilleure résistance du système aux crash disques
+\item face aux attaques de tout types \textit{(ex: saturation de /home/abdou)}
+\item failles de sécurité \textit{(ex: \texttt{/tmp} accessible en écriture à tous les utilisateurs et programmes )}
 \end{itemize}
 \end{frame}
 
@@ -231,123 +273,113 @@ monté
 \end{itemize}
 \end{frame}
 
+
+
+
+%\begin{frame}
+%%Ajout/suppresion de logiciels par\\
+%\textbf{RPM: RPM Package Manager }
+%\end{center}
+%\begin{block}{YUM: Yellowdog Update Modifer}
+%\begin{itemize}
+%%\item Dépots de paquets \texttt{/etc/yum.repos.d/nomdepot.repo}
+%\item \textit{yum update}: met à jour le système 
+%\item \textit{yum update yum}: mise à jour après une installation toute fraîche
+%\item \textit{yum list kern\*} : recherche un paquet 
+%\item \textit{yum remove paquet} : suppression du paquet
+%\item \textit{yum --exclude=kern* update} : mise à jour séléctive
+%\end{itemize}
+%\end{block}
+%\end{frame}
+
+%\begin{frame}
+%\textbf{Les dépôts}
+%\begin{itemize}
+%\item \textbf{obligatoires: } Dépôt \texttt{fedora} et dépôts
+%\texttt{updates-released}
+%\item \textbf{pour les habitués:} \texttt{Dépôt dag, dries, freshrmps, jpackage, adobe,
+%rmpforge}
+%\item \textbf{pour les experts:} \texttt{Dépôts atrpms, kde-redhat, newrmps,
+%remi, drpixel, kwizart}
+%\end{itemize}
+%\end{frame}
+
 \section{Installation de logiciels}
+\frame{\tableofcontents[current]}
+
+
+
 \begin{frame}
 Ajout/suppresion de logiciels depuis\
 \textbf{les sources}
-\begin{block}{Compilation du programme}
-tar zxvf logiciel.tar.gz\\
-cd logiciel\\
-./configure\\
-make\\
-make install\\
-\end{block}
-\begin{block}{Avantages}
-Dernières versions\\
-Logiciel adapté à la plateforme, plus performant\\
-Options supplémentraire\\
-\end{block}
-\end{frame}
-
-
-\begin{frame}
-\begin{center}
-Ajout/suppresion de logiciels par\\
-\textbf{RPM: RPM Package Manager }
-\end{center}
-\begin{block}{YUM: Yellowdog Update Modifer}
-\begin{itemize}
-\item Dépots de paquets \texttt{/etc/yum.repos.d/nomdepot.repo}
-\item \textit{yum update}: met à jour le système 
-\item \textit{yum update yum}: mise à jour après une installation toute fraîche
-\item \textit{yum list kern\*} : recherche un paquet 
-\item \textit{yum remove paquet} : suppression du paquet
-\item \textit{yum --exclude=kern* update} : mise à jour séléctive
-\end{itemize}
-\end{block}
+	\begin{block}{Compilation du programme}
+	tar zxvf logiciel.tar.gz\\
+	cd logiciel\\
+	./configure\\
+	make\\
+	make install\\
+	\end{block}
+	\begin{block}{Avantages}
+	Dernières versions\\
+	Logiciel adapté à la plateforme, plus performant\\
+	Options supplémentraire\\
+	\end{block}
 \end{frame}
 
 \begin{frame}
-\textbf{Les dépôts}
-\begin{itemize}
-\item \textbf{obligatoires: } Dépôt \texttt{fedora} et dépôts
-\texttt{updates-released}
-\item \textbf{pour les habitués:} \texttt{Dépôt dag, dries, freshrmps, jpackage, adobe,
-rmpforge}
-\item \textbf{pour les experts:} \texttt{Dépôts atrpms, kde-redhat, newrmps,
-remi, drpixel, kwizart}
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}
-\begin{center}
-Ajout/suppresion de logiciels par\\
-\textbf{APT : Advanced Package Tool}
-\end{center}
-\begin{itemize}
-\item Dépots de paquets \texttt{/etc/apt/sources.list}
-\item \textit{install} : installation d'un paquet = téléchargement + installation + configuration 
-\item \textit{upgrade} : mise à jour de tous les paquets installés (suivi de sécurité)
-\item Notion de dépendances entre les paquets
-\item APT ne fait pas lui-même l'installation et la configuration, il passe par \texttt{dpkg}
-\end{itemize}
+	\begin{center}
+	Ajout/suppresion de logiciels par\\
+	\textbf{APT : Advanced Package Tool}
+	\end{center}
+	\begin{itemize}
+	\item Dépots de paquets \texttt{/etc/apt/sources.list}
+	\item \textit{install} : installation d'un paquet = téléchargement + installation + configuration 
+	\item \textit{upgrade} : mise à jour de tous les paquets installés (suivi de sécurité)
+	\item Notion de dépendances entre les paquets
+	\item APT ne fait pas lui-même l'installation et la configuration, il passe par \texttt{dpkg}
+	\end{itemize}
 \end{frame}
 
 \begin{frame}
-\begin{center}
-\texttt{aptitude} : le centre de commande APT
-\end{center}
-\begin{itemize}
-\item \texttt{/etc/apt/sources.list} : la configuration des dépôts
-\item \texttt{aptitude update} : lecture des paquets disponibles dans les dépots 
-\item \texttt{aptitude search \textit{motclef}}
-\item \texttt{aptitude show \textit{paquet}}
-\item \texttt{aptitude install \textit{paquet}} 
-\item \texttt{aptitude safe-upgrade} et  \texttt{aptitude full-upgrade}
-\item et aussi : \textit{dpkg -l}
-\end{itemize}
+	\begin{center}
+	\texttt{aptitude} : le centre de commande APT
+	\end{center}
+	\begin{itemize}
+	\item \textbf{/etc/apt/sources.list} : la configuration des dépôts
+	\item \textbf{aptitude update} : lecture des paquets disponibles dans les dépots 
+	\item \textbf{aptitude search \textit{motclef}}
+	\item \textbf{aptitude show \textit{paquet}}
+	\item \textbf{aptitude install \textit{paquet}} 
+	\item \textbf{aptitude safe-upgrade} et  \textbf{aptitude full-upgrade}
+	\item et aussi : \textit{dpkg -l}
+	\end{itemize}
 \end{frame}
 
 \begin{frame}
 Les dépôts conseillés :
-\begin{itemize}
-\item dépôts officiels, depuis le miroir le plus proche : \\
- \texttt{deb \url{http://ftp.fr.debian.org/debian} lenny main}
-\item dépôt de sécurité (obligatoire !) : \\
- \texttt{deb \url{http://security.debian.org/} lenny/updates main}
-\item dépôts \textit{volatile} : \url{http://volatile.debian.org}
-\item dépôts backports (uniquement en cas de nécessité impérative) : \url{http://www.backports.org}
-\end{itemize}
+	\begin{itemize}
+	\item dépôts officiels, depuis le miroir le plus proche : \\
+	 \texttt{deb \url{http://ftp.fr.debian.org/debian} lenny main}
+	\item dépôt de sécurité (obligatoire !) : \\
+	 \texttt{deb \url{http://security.debian.org/} lenny/updates main}
+	\item dépôts \textit{volatile} : \url{http://volatile.debian.org}
+	\item dépôts backports (uniquement en cas de nécessité impérative) : \url{http://www.backports.org}
+	\end{itemize}
 NB : les autres dépots ne sont pas toujours dignes de confiance !
 \end{frame}
 
 \begin{frame}
-Rôles de l'administrateur
+Un peu de lecture avant l'installation...
 \begin{itemize}
-\item Créer, modifier, supprimer un utilisateur
-\item Gérer les fichiers et les disques
-\item Surveiller l'espace disque
-\item Organiser les sauvegardes
-\item Ajout de périphériques
-\item Améliorer les performances du systèmes
-\item Installer de nouveau produits
-\item Veiller à la sécurité du système
-\item Paramétrer le démarrage et l'arrêt du système
-\item Suivre les logs du système
+\item Manuel d'installation : \url{http://www.debian.org/releases/stable/installmanual}
+\item Installation via le réseau : \url{http://www.debian.org/distrib/netinst}
 \end{itemize}
 \end{frame}
 
-\begin{frame}
-Les bonnes pratiques
-\begin{itemize}
-\item Sauvegarder son système
-\item Tenir un journal de bord (opérations d'exploitation)
-\item Agir de manière réversible
-\item Automatiser les procédures
-\item Anticiper les problèmes
-\end{itemize}
-\end{frame}
+
+
+
+
 
 \section{Les commandes de bases} 
 \frame{\tableofcontents[current]}
