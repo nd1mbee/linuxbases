@@ -10,7 +10,7 @@
 \usetheme{Warsaw}
 
 \title{Introduction à l'administration \\ \textit{d'un système GNU/Linux}}
-\author{}
+\author{Ndimby Andriantsoavina}
 \institute{Agence universitaire de la Francophonie}
 
 \begin{document}
@@ -41,25 +41,12 @@
 \item Gérer les fichiers et les disques
 \item Surveiller l'espace disque
 \item Organiser les sauvegardes
-\item Ajout de périphériques
-\item Améliorer les performances du systèmes
+\item Ajoutes des périphériques
+\item Améliorer les performances du système
 \item Intégrer de nouveaux services
 \item Veiller à la sécurité du système
 \item Paramétrer le démarrage et l'arrêt du système
 \item Suivre les logs du système
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\begin{center}
-\textbf{Les bonnes pratiques}
-\end{center}
-\begin{itemize}
-\item Sauvegarder son système
-\item Tenir un journal de bord (opérations d'exploitation)
-\item Agir de manière réversible
-\item Automatiser les procédures
-\item Anticiper les problèmes
 \end{itemize}
 \end{frame}
 
@@ -120,8 +107,104 @@ Les versions de Debian GNU/Linux
 \end{itemize}
 \end{frame}
 
+\begin{frame}
+\textbf{TP:} Installation de Débian par le réseau
+\end{frame} 
 
-\section{Notion de système de fichiers}
+\section{Les commandes de bases} 
+\frame{\tableofcontents[current]}
+
+\begin{frame}
+\textbf{Shell}: interpréteur de commandes, interface utilisateur et système
+d'exploitation
+    \begin{itemize}
+    \item accès à la machine: login/motdepasse 
+    \item lancement de commandes à partir d'un interpréteur \textit{Shell}
+    \item syntaxe: \textit{prompt\# [commande] [option(s)] [arguments]}
+    \item exemple: \textit{ls -l /home}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+\textbf{Opération sur les répertoires}
+    \begin{itemize}
+    \item \textbf{ls} : lister les répertoires (syntax: \texttt{ls [-options][repertoires]})
+    \item \textbf{mkdir} : création de répertoire (syntax:\texttt{mkdir [-options][nom du répertoire]})
+    \item \textbf{rmdir} : suppression de répertoire (syntax:\texttt{rmdir [-options][nom du répertoire]})
+    \item \textbf{pwd} : afficher le répertoire courant
+    \item \textbf{cd} : changer de répertoire (syntax:\texttt{cd [nom du répertoire]})
+    \item \textbf{du} : espace disque utilisé par le répertoire (syntax:\texttt{du [option][nom du répertoire]})
+    \item \textbf{df} : espace disque occupé (ou libre) sur chaque partition (syntax: \texttt{df [-options][fichier]})
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+\textbf{Opération sur les fichiers}
+    \begin{itemize}
+    \item \textbf{cp} : copier les fichiers ou les répertoires (syntax: \texttt{cp [-options]<source><destination>})
+    \item \textbf{mv} : déplace ou renommer les fichiers ou les répertoires (syntax: \texttt{mv [-options]<source><destination>})
+    \item \textbf{rm} : effacer un fichier (syntax: \texttt{rm [-options][fichier]})
+    \item \textbf{find} : chercher un fichier (syntax: \texttt{find [-répertoire de départ][option][action]})
+    \item \textbf{which} : Montrer le chemin d'accès à une commande (syntax: \texttt{which [nom de pgm]})
+    \item \textbf{less ou more} : afficher à l'écran le contenu d'un fichier text (syntax: \texttt{less [-options]<nom de fichier>})
+    \item \textbf{whereis et locate}: permet de retrouver les emplacements des fichiers
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+\textbf{Les filtres}: commandes qui, à partir d'un flux d'entrées donné,
+effectuent des traitements avant d'afficher un résultat en sortie.
+    \begin{itemize}
+    \item \textbf{cat} : concaténatation d'un fichier et afficher sur la sortie
+    standard. \\
+    \item \textbf{cut}: afficher suivant les options certains champs d'un
+    fichier \\
+    \textit{cut -d : -f1 /etc/passwd}
+    \item \textbf{grep} : cherche une expression dans un fichier \\
+    \textit{grep false /etc/passwd} \\
+    \textit{grep -v root /etc/passwd} \\
+    \item \textbf{sort}: tri ordre croissant
+    \item \textbf{join}: effectue des jointures des lignes de deux fichiers
+    différents dans un même champs. 
+    \item \textbf{paste}: pour fusionner deux fichiers différents en prenant
+    chaque ligne de chaque fichier pour former une nouvelle ligne
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\textbf{Redirections} \\
+    \begin{itemize}
+    \item Entrée standard: descripteur \textbf{0}
+    \item Sortie standard: descripteur \textbf{1}
+    \item Sortie d'erreur standard: descripteur \textbf{2}
+    \item \texttt{echo 'Bonjour Dakar' > hello.txt}
+    Sortie standard et sortie d'erreur redirigé vers un fichier
+    \item \texttt{tail /etc/passwd > fichiersortie 2>\&1 }
+    \item \texttt{tail /etc/passwd >\& fichiersortie 2>1 }
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\textbf{Tubes}
+    \begin{itemize}
+    \item \textbf{pipe} permet que la sortie d'une commande devient l'entrée
+    d'une autre \\
+    ex: \texttt{sort /etc/passwd | head -6}
+    \item \textbf{tee}: recopie la sortie dans un fichier \\et affiche en même
+    temps le résultat sur la sortie standard \\
+    ex: \texttt{ls -l /etc | tee fichier | wc  -l}
+    \item \textbf{xargs} passe en argument d'une commande les flux reçus en
+    entrée\\
+    ex: \texttt{cat lefichier | xargs ls}
+
+    \end{itemize}
+\end{frame}
+
+
+
+\section{Système de fichiers et gestion des périphériques}
 \frame{\tableofcontents[current]}
 
 \begin{frame}
@@ -153,7 +236,7 @@ L'arborescence système :
     \item \textbf{/home} : répertoires des utilisateurs
     \item \textbf{/mnt} et \textbf{/media} : points de montages    
     \item \textbf{/tmp} : données temporaires
-    \item Linux : \textbf{/proc} et \textbf{/sys} : systèmes de fichiers virtuels
+    \item \textbf{/proc} et \textbf{/sys} : systèmes de fichiers virtuels
     \item \textbf{/dev} : fichiers spéciaux nommés \texttt{device} correspondants à des périphériques
     \end{itemize}
 \end{frame}
@@ -266,7 +349,7 @@ de fichier.
 \item \textbf{df}: affiche le résumé des espaces libre sur la partition
 \item \textbf{du}: affiche les informations de l'espace disque utilisé sur la
 branche d'un répertoire
-\item \textbf{fsck} est un utilistaire qui permet le contôle de l'intégrité des
+\item \textbf{fsck} est un utilitaire qui permet le contôle de l'intégrité des
 partions
 \item \texttt{ex: fsck /dev/sdb3} de préférence sur un système de fichier non
 monté
@@ -274,39 +357,8 @@ monté
 \end{frame}
 
 
-
-
-%\begin{frame}
-%%Ajout/suppresion de logiciels par\\
-%\textbf{RPM: RPM Package Manager }
-%\end{center}
-%\begin{block}{YUM: Yellowdog Update Modifer}
-%\begin{itemize}
-%%\item Dépots de paquets \texttt{/etc/yum.repos.d/nomdepot.repo}
-%\item \textit{yum update}: met à jour le système 
-%\item \textit{yum update yum}: mise à jour après une installation toute fraîche
-%\item \textit{yum list kern\*} : recherche un paquet 
-%\item \textit{yum remove paquet} : suppression du paquet
-%\item \textit{yum --exclude=kern* update} : mise à jour séléctive
-%\end{itemize}
-%\end{block}
-%\end{frame}
-
-%\begin{frame}
-%\textbf{Les dépôts}
-%\begin{itemize}
-%\item \textbf{obligatoires: } Dépôt \texttt{fedora} et dépôts
-%\texttt{updates-released}
-%\item \textbf{pour les habitués:} \texttt{Dépôt dag, dries, freshrmps, jpackage, adobe,
-%rmpforge}
-%\item \textbf{pour les experts:} \texttt{Dépôts atrpms, kde-redhat, newrmps,
-%remi, drpixel, kwizart}
-%\end{itemize}
-%\end{frame}
-
 \section{Installation de logiciels}
 \frame{\tableofcontents[current]}
-
 
 
 \begin{frame}
@@ -336,7 +388,7 @@ Ajout/suppresion de logiciels depuis\
 	\item \textit{install} : installation d'un paquet = téléchargement + installation + configuration 
 	\item \textit{upgrade} : mise à jour de tous les paquets installés (suivi de sécurité)
 	\item Notion de dépendances entre les paquets
-	\item APT ne fait pas lui-même l'installation et la configuration, il passe par \texttt{dpkg}
+	\item APT ne fait pas lui-même l'installation et la configuration, il passe par \textbf{dpkg}
 	\end{itemize}
 \end{frame}
 
@@ -356,15 +408,17 @@ Ajout/suppresion de logiciels depuis\
 \end{frame}
 
 \begin{frame}
-Les dépôts conseillés :
+\begin{block}{ Les dépôts conseillés :}
 	\begin{itemize}
 	\item dépôts officiels, depuis le miroir le plus proche : \\
-	 \texttt{deb \url{http://ftp.fr.debian.org/debian} lenny main}
+	 \texttt{deb \url{http://ftp.fr.debian.org/debian} squeeze main}
 	\item dépôt de sécurité (obligatoire !) : \\
-	 \texttt{deb \url{http://security.debian.org/} lenny/updates main}
-	\item dépôts \textit{volatile} : \url{http://volatile.debian.org}
+	 \texttt{deb http://security.debian.org/} squeeze/updates main
+	\item dépot updates : \\
+	\texttt{deb http://ftp.fr.debian.org/debian/ squeeze-updates main}
 	\item dépôts backports (uniquement en cas de nécessité impérative) : \url{http://www.backports.org}
 	\end{itemize}
+\end{block}
 NB : les autres dépots ne sont pas toujours dignes de confiance !
 \end{frame}
 
@@ -380,140 +434,51 @@ Un peu de lecture avant l'installation...
 
 
 
-
-\section{Les commandes de bases} 
-\frame{\tableofcontents[current]}
-
-\begin{frame}
-\textbf{Shell}: interpréteur de commandes, interface utilisateur et système
-d'exploitation
-    \begin{itemize}
-    \item accès à la machine: login/motdepasse 
-    \item lancement de commandes à partir d'un interpréteur \textit{Shell}
-    \item syntaxe: \textit{prompt\# [commande] [option(s)] [arguments]}
-    \item exemple: \textit{ls -l /home}
-    \end{itemize}
-\end{frame}
-
-\begin{frame}
-\textbf{Opération sur les répertoires}
-    \begin{itemize}
-    \item \textbf{ls} : lister les répertoires (syntax: \texttt{ls [-options][repertoires]})
-    \item \textbf{mkdir} : création de répertoire (syntax:\texttt{mkdir [-options][nom du répertoire]})
-    \item \textbf{rmdir} : suppression de répertoire (syntax:\texttt{rmdir [-options][nom du répertoire]})
-    \item \textbf{pwd} : afficher le répertoire courant
-    \item \textbf{cd} : changer de répertoire (syntax:\texttt{cd [nom du répertoire]})
-    \item \textbf{du} : espace disque utilisé par le répertoire (syntax:\texttt{du [option][nom du répertoire]})
-    \item \textbf{df} : espace disque occupé (ou libre) sur chaque partition (syntax: \texttt{df [-options][fichier]})
-    \end{itemize}
-\end{frame}
-
-\begin{frame}
-\textbf{Opération sur les fichiers}
-    \begin{itemize}
-    \item \textbf{cp} : copier les fichiers ou les répertoires (syntax: \texttt{cp [-options]<source><destination>})
-    \item \textbf{mv} : déplace ou renommer les fichiers ou les répertoires (syntax: \texttt{mv [-options]<source><destination>})
-    \item \textbf{rm} : effacer un fichier (syntax: \texttt{rm [-options][fichier]})
-    \item \textbf{find} : chercher un fichier (syntax: \texttt{find [-répertoire de départ][option][action]})
-    \item \textbf{which} : Montrer le chemin d'accès à une commande (syntax: \texttt{which [nom de pgm]})
-    \item \textbf{less ou more} : afficher à l'écran le contenu d'un fichier text (syntax: \texttt{less [-options]<nom de fichier>})
-    \item \textbf{whereis et locate}: permet de retrouver les emplacements des
-    fichiers
-    \end{itemize}
-\end{frame}
-
-\begin{frame}
-\textbf{Les filtres}: commandes qui, à partir d'un flux d'entrées donné,
-effectuent des traitements avant d'afficher un résultat en sortie.
-    \begin{itemize}
-    \item \textbf{cat} : concaténatation d'un fichier et afficher sur la sortie
-    standard. \\
-    \item \textbf{cut}: afficher suivant les options certains champs d'un
-    fichier \\
-    \textit{cut -d : -f1 /etc/passwd}
-    \item \textbf{grep} : cherche une expression dans un fichier \\
-    \textit{grep false /etc/passwd} \\
-    \textit{grep -v root /etc/passwd} \\
-    \item \textbf{sort}: tri ordre croissant
-    \item \textbf{join}: effectue des jointures des lignes de deux fichiers
-    différents dans un même champs. 
-    \item \textbf{paste}: pour fusionner deux fichiers différents en prenant
-    chaque ligne de chaque fichier pour former une nouvelle ligne
-    \end{itemize}
-\end{frame}
+%\section{Utilisation de l'editeur de fichiers}
+%\frame{\tableofcontents[current]}
 
 
-\begin{frame}
-\textbf{Redirections} \\
-    \begin{itemize}
-    \item Entrée standard: descripteur \textbf{0}
-    \item Sortie standard: descripteur \textbf{1}
-    \item Sortie d'erreur standard: descripteur \textbf{2}
-    \item \texttt{echo 'Bonjour Dakar' > hello.txt}
-    Sortie standard et sortie d'erreur redirigé vers un fichier
-    \item \texttt{tail /etc/passwd > fichiersortie 2>\&1 }
-    \item \texttt{tail /etc/passwd >\& fichiersortie 2>1 }
-    \end{itemize}
-\end{frame}
+%\begin{frame}
+%\textbf{Vi\texttt(Visual Editor)} 
+%est un éditeur de texte, présent sur toutes les version de linux. \\
+%Il existe le mode \textit{édition} et le mode \textit{commande} \\
+%Pour ajout et suppression :
+%\begin{itemize}
+%    \item \textbf{insertion} : \texttt{Esc + i} 
+%    \item \textbf{suppression} : caractère \texttt{Esc + x} ou d'une ligne \texttt{Esc + d + d}
+%    \item \textbf{copier} : \textit{Esc + y + y} 
+%    \item \textbf{coller} : \textit{Esc + p} 
+%    \item \textbf{annuler} : \textit{u} 
+%    \end{itemize}
+%\end{frame}
 
+%\begin{frame}
+%    \begin{itemize}
+%    \item \textbf{rechercher}: \textit{Esc + /text\_rechercher}
+%    \item \textbf{substitue}:
+%    \textit{ligne\_debut,ligne\_fins/chaine1/chaine2/g} sans confirmation \\
+%    \textit{ligne\_debut,ligne\_fins/chaine1/chaine2/g} avec confirmation \\
+%    \end{itemize}
+%\end{frame}
 
-\begin{frame}
-\textbf{Tubes}
-    \begin{itemize}
-    \item \textbf{pipe} permet que la sortie d'une commande devient l'entrée
-    d'une autre \\
-    ex: \texttt{sort /etc/passwd | head -6}
-    \item \textbf{tee}: recopie la sortie dans un fichier \\et affiche en même
-    temps le résultat sur la sortie standard \\
-    ex: \texttt{ls -l /etc | tee fichier | wc  -l}
-    \item \textbf{xargs} passe en argument d'une commande les flux reçus en
-    entrée\\
-    ex: \texttt{cat lefichier | xargs ls}
-
-    \end{itemize}
-\end{frame}
-
-
-\section{Utilisation de l'editeur de fichiers}
-\frame{\tableofcontents[current]}
-
-
-\begin{frame}
-\textbf{Vi\texttt(Visual Editor)} 
-est un éditeur de texte, présent sur toutes les version de linux. \\
-Il existe le mode \textit{édition} et le mode \textit{commande} \\
-Pour ajout et suppression :
-\begin{itemize}
-    \item \textbf{insertion} : \texttt{Esc + i} 
-    \item \textbf{suppression} : caractère \texttt{Esc + x} ou d'une ligne \texttt{Esc + d + d}
-    \item \textbf{copier} : \textit{Esc + y + y} 
-    \item \textbf{coller} : \textit{Esc + p} 
-    \item \textbf{annuler} : \textit{u} 
-    \end{itemize}
-\end{frame}
-
-\begin{frame}
-    \begin{itemize}
-    \item \textbf{rechercher}: \textit{Esc + /text\_rechercher}
-    \item \textbf{substitue}:
-    \textit{ligne\_debut,ligne\_fins/chaine1/chaine2/g} sans confirmation \\
-    \textit{ligne\_debut,ligne\_fins/chaine1/chaine2/g} avec confirmation \\
-    \end{itemize}
-\end{frame}
-
-\begin{frame}
-    \begin{itemize}
-    \item \textbf{sauvegarder} : \textit{Esc} + \textit{:} + \textit{w} 
-    \item \textbf{sauvegarder et quitter} : \textit{Esc} + \textit{:} +
-    \textit{w} + \textit{q} 
-    \item \textbf{quitter sans sauvegarder} : \textit{Esc} + \textit{:} +
-    \textit{q} + \textit{!} 
-    \end{itemize}
-\end{frame}
+%\begin{frame}
+%    \begin{itemize}
+%    \item \textbf{sauvegarder} : \textit{Esc} + \textit{:} + \textit{w} 
+%    \item \textbf{sauvegarder et quitter} : \textit{Esc} + \textit{:} +
+%    \textit{w} + \textit{q} 
+%    \item \textbf{quitter sans sauvegarder} : \textit{Esc} + \textit{:} +
+%    \textit{q} + \textit{!} 
+%    \end{itemize}
+%\end{frame}
 
 \begin{frame}
 \begin{center}
 Travaux pratiques
+\begin{itemize}
+\item \textbf{vim}: l'editeur de texte
+\item \textbf{rsync}: synchronisation
+\item \textbf{tar}: archivage
+\end{itemize}
 \end{center}
 \end{frame}
 
@@ -694,98 +659,90 @@ groupe, \texttt{o} pour les autres, \texttt{a} pour tout le monde.
 %
 
 
+%\section{La sauvegarde}
+%\frame{\tableofcontents[current]}
+
+%\begin{frame}
+%Pourquoi sauvegardé ?
+%\begin{itemize}
+%\item Fichier perdu, abimé
+%\item Erreur humaine
+%\item Crash disque
+%\end{itemize}
+%\end{frame}
+
+%\begin{frame}
+%\textbf{tar}
+%\begin{itemize}
+%\item Sauvegarder avec tar : \texttt{tar -cvf nom\_support liste\_fichiers}
+%\item Consulter une archive : \texttt{tar -tvf  nom\_support}
+%\item Restituer une archive : \texttt{tar -xvf nom\_support (liste\_fichiers)}
+%\\
+%Compression avec les options \textbf{z} (gzip) et \textbf{j} (bzip2) \\
+%\end{itemize}
+%end{frame}
+
+%begin{frame}
+%a commande \textbf{cpio} : sauvegarde sur la sortie standard
+%begin{itemize}
+%\item   Sauvegarder : \texttt{cpio -ov > nomsupport}\\
+%\texttt{ex : find /home/oldaccounts | cpio -ov > /dev/support}
+%\item Consulter une archive : \texttt{cpio -itv < nomsupport}
+%\item Restituer une archive : \texttt{cpio -iv listefichiers < nomsupport}
+%\end{itemize}
+%\end{frame}
+
+%\begin{frame}
+%La commande \textbf{dd}: copie physique bloc à bloc
+%\begin{itemize}
+%\item \texttt{if= le fichier à copier}
+%\item \texttt{of= fichier la copie}
+%\item \texttt{bs= n}       taille des blocs
+%\item \texttt{skip= n}     nombres de blocs sautés en entrée
+%\item \texttt{seek= n}     nombres de bloc sautés en sortie
+%\item \texttt{count= n}    nombre de bloc copiés
+%\item \textit{exemple:} \texttt{dd if=/dev/hda1 of=/dev/sda1}
+%\end{itemize}
+%\end{frame}
 
 
+%\begin{frame}
+%\textbf{Partimage} : permet de faire l'image d'une partition
+%\begin{itemize}
+%\item Contrairement a dd, ne prend en compte que les bloc occupés
+%\item Possibilité de compression (Gzip ou Bzip2)
+%\item Fonctionnement réseau (NFS, mode client serveur)
+%\item \textit{exemple:} \texttt{partimage -z1 -o -d save /dev/hda12
+%/mnt/backup/redhat-6.2.partimg.gz}
+%\end{itemize}
+%\end{frame}
 
+%\begin{frame}
+%\textbf{Rsync}
+%\begin{itemize}
+%\item Outil open source permettant la sauvegarde incrémentale
+%\item Sauvegarde de fichiers locaux
+%\item Copie locale vers une machine distante et inversement
+%\item Copie locale vers un serveurs rsync et inversement
+%\item \textit{exemple:}{rsync -avF /src/path/ /dest/dir}
+%\end{itemize}
+%\end{frame}
 
+%\begin{frame}
+%Sauvegarde réseaux
+%\begin{itemize}
+%\item Avec \textbf{tar}\\
+%\texttt{tar -zcf - /some/file | ssh <host> tar -zxf - -C /destination}
+%\item Avec \textbf{partimage}\\
+%\texttt{partimage -s <host> save /some/partition <file>}
+%\item Avec \textbf{scp}\\
+%\texttt{scp /some/file [\ more ... ]\ <host>:/destination/file}
+%\item Avec \textbf{Rsync}\\
+%\texttt{rsync -e ssh /some/file [\ more ... ]\
+%<host>:/destination/file}
 
-
-
-
-\section{La sauvegarde}
-\frame{\tableofcontents[current]}
-
-\begin{frame}
-Pourquoi sauvegardé ?
-\begin{itemize}
-\item Fichier perdu, abimé
-\item Erreur humaine
-\item Crash disque
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\textbf{tar}
-\begin{itemize}
-\item Sauvegarder avec tar : \texttt{tar -cvf nom\_support liste\_fichiers}
-\item Consulter une archive : \texttt{tar -tvf  nom\_support}
-\item Restituer une archive : \texttt{tar -xvf nom\_support (liste\_fichiers)}
-\\
-Compression avec les options \textbf{z} (gzip) et \textbf{j} (bzip2) \\
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-La commande \textbf{cpio} : sauvegarde sur la sortie standard
-\begin{itemize}
-\item   Sauvegarder : \texttt{cpio -ov > nomsupport}\\
-\texttt{ex : find /home/oldaccounts | cpio -ov > /dev/support}
-\item Consulter une archive : \texttt{cpio -itv < nomsupport}
-\item Restituer une archive : \texttt{cpio -iv listefichiers < nomsupport}
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-La commande \textbf{dd}: copie physique bloc à bloc
-\begin{itemize}
-\item \texttt{if= le fichier à copier}
-\item \texttt{of= fichier la copie}
-\item \texttt{bs= n}       taille des blocs
-\item \texttt{skip= n}     nombres de blocs sautés en entrée
-\item \texttt{seek= n}     nombres de bloc sautés en sortie
-\item \texttt{count= n}    nombre de bloc copiés
-\item \textit{exemple:} \texttt{dd if=/dev/hda1 of=/dev/sda1}
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}
-\textbf{Partimage} : permet de faire l'image d'une partition
-\begin{itemize}
-\item Contrairement a dd, ne prend en compte que les bloc occupés
-\item Possibilité de compression (Gzip ou Bzip2)
-\item Fonctionnement réseau (NFS, mode client serveur)
-\item \textit{exemple:} \texttt{partimage -z1 -o -d save /dev/hda12
-/mnt/backup/redhat-6.2.partimg.gz}
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\textbf{Rsync}
-\begin{itemize}
-\item Outil open source permettant la sauvegarde incrémentale
-\item Sauvegarde de fichiers locaux
-\item Copie locale vers une machine distante et inversement
-\item Copie locale vers un serveurs rsync et inversement
-\item \textit{exemple:}{rsync -avF /src/path/ /dest/dir}
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-Sauvegarde réseaux
-\begin{itemize}
-\item Avec \textbf{tar}\\
-\texttt{tar -zcf - /some/file | ssh <host> tar -zxf - -C /destination}
-\item Avec \textbf{partimage}\\
-\texttt{partimage -s <host> save /some/partition <file>}
-\item Avec \textbf{scp}\\
-\texttt{scp /some/file [\ more ... ]\ <host>:/destination/file}
-\item Avec \textbf{Rsync}\\
-\texttt{rsync -e ssh /some/file [\ more ... ]\
-<host>:/destination/file}
-
-\end{itemize}
-\end{frame}
+%\end{itemize}
+%\end{frame}
 
 
 \section{Gestion de processus} 
@@ -971,7 +928,6 @@ Au secours je suis perdu, aidez moi !
     \item \url{http://www.linux-france.org/article/these/smart-questions/smart-questions-fr.html}
     \end{itemize}
 \end{frame}
-
 
 
 
