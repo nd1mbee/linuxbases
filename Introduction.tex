@@ -120,12 +120,22 @@ Un peu de lecture avant l'installation...
 \frame{\tableofcontents[current]}
 
 \begin{frame}
+Organisation des partitions sous Linux
+\begin{itemize}
+\item assurer une meilleure résistance du système aux crash disques
+\item face aux attaques de tout types \textit{(ex: saturation de /home/abdou)}
+\item failles de sécurité \textit{(ex: \texttt{/tmp} accessible en écriture à tous les utilisateurs et programmes )}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
 L'arborescence système : \url{http://www.pathname.com/fhs/}
     \begin{itemize}
     \item \textbf{/} : répertoire racine doit contenir tout ce qui permet au système de démarrer (1Go)
     \item \textbf{/usr} (\textit{unix system ressources}) : ressources non nécessaires au démarrage contenant des programmes, documentation (2Go)
     \item \textbf{/var} : répertoires des données variables (ex: logs, mail, spool, squid) (2go en fonction du serveur)
-    \item \textbf{/home} : répertoires des utilisateurs
+    \item \textbf{/home} : répertoires des utilisateurs ( si nfs 500 Go)
 	\item \textbf{/tmp} : données temporaires (512Mo à 1Go)
 	\item \textbf{swap :} 1 Go  
     \end{itemize}
@@ -238,14 +248,6 @@ effectuent des traitements avant d'afficher un résultat en sortie.
 
 
 
-\begin{frame}
-Organisation des partitions sous Linux
-\begin{itemize}
-\item assurer une meilleure résistance du système aux crash disques
-\item face aux attaques de tout types \textit{(ex: saturation de /home/abdou)}
-\item failles de sécurité \textit{(ex: \texttt{/tmp} accessible en écriture à tous les utilisateurs et programmes )}
-\end{itemize}
-\end{frame}
 
 \section{Gestion des périphériques}
 \frame{\tableofcontents[current]}
