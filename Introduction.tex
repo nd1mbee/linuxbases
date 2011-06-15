@@ -108,8 +108,51 @@ Les versions de Debian GNU/Linux
 \end{frame}
 
 \begin{frame}
+Un peu de lecture avant l'installation...
+\begin{itemize}
+\item Manuel d'installation : \url{http://www.debian.org/releases/stable/installmanual}
+\item Installation via le réseau : \url{http://www.debian.org/distrib/netinst}
+\end{itemize}
 \textbf{TP:} Installation de Débian par le réseau
 \end{frame} 
+
+\section{Système de fichiers}
+\frame{\tableofcontents[current]}
+
+\begin{frame}
+\begin{center}
+Système de fichiers: façon d'organiser et de stocker une arborescence sur
+un support (disque, disquette, cd ...)
+\end{center}
+    \begin{itemize}
+    \item \textbf{MS-DOS} : FAT16/32 (File allocation Table)
+    \item \textbf{Windows} : FAT16, FAT32, VFAT, NTFS, exFAT(extended FAT)
+    \item \textbf{Linux} : ext2/3/4 (extended File System), HFS, ReiserFS, XFS, swap ...
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+L'arborescence système :
+    \begin{itemize}
+    \item \textbf{/} : répertoire racine doit contenir tout ce qui permet au système de démarrer
+    \item \textbf{/bin}, \textbf{/sbin} : contenant les exécutables de base (ex: cp, mv, ls)
+    \item \textbf{/lib} : bibliothèques associées 
+    \item \textbf{/etc} : contient les fichiers de configuration du système
+    \item \textbf{/usr} (\textit{unix system ressources}) : ressources non nécessaires au démarrage contenant des programmes, documentation
+    \end{itemize}
+ \end{frame}
+ 
+ \begin{frame}
+	\begin{itemize}
+    \item \textbf{/var} : répertoires des données variables (ex: logs)
+    \item \textbf{/home} : répertoires des utilisateurs
+    \item \textbf{/mnt} et \textbf{/media} : points de montages    
+    \item \textbf{/tmp} : données temporaires
+    \item \textbf{/proc} et \textbf{/sys} : systèmes de fichiers virtuels
+    \item \textbf{/dev} : fichiers spéciaux nommés \texttt{device} correspondants à des périphériques
+    \end{itemize}
+\end{frame}
+
 
 \section{Les commandes de bases} 
 \frame{\tableofcontents[current]}
@@ -204,42 +247,18 @@ effectuent des traitements avant d'afficher un résultat en sortie.
 
 
 
-\section{Système de fichiers et gestion des périphériques}
+
+\begin{frame}
+Organisation des partitions sous Linux
+\begin{itemize}
+\item assurer une meilleure résistance du système aux crash disques
+\item face aux attaques de tout types \textit{(ex: saturation de /home/abdou)}
+\item failles de sécurité \textit{(ex: \texttt{/tmp} accessible en écriture à tous les utilisateurs et programmes )}
+\end{itemize}
+\end{frame}
+
+\section{Gestion des périphériques}
 \frame{\tableofcontents[current]}
-
-\begin{frame}
-\begin{center}
-Système de fichiers: façon d'organiser et de stocker une arborescence sur
-un support (disque, disquette, cd ...)
-\end{center}
-    \begin{itemize}
-    \item \textbf{MS-DOS} : FAT16/32 (File allocation Table)
-    \item \textbf{Windows} : FAT16, FAT32, VFAT, NTFS, exFAT(extended FAT)
-    \item \textbf{Linux} : ext2/3/4 (extended File System), HFS, ReiserFS, XFS, swap ...
-    \end{itemize}
-\end{frame}
-
-\begin{frame}
-L'arborescence système :
-    \begin{itemize}
-    \item \textbf{/} : répertoire racine doit contenir tout ce qui permet au système de démarrer
-    \item \textbf{/bin}, \textbf{/sbin} : contenant les exécutables de base (ex: cp, mv, ls)
-    \item \textbf{/lib} : bibliothèques associées 
-    \item \textbf{/etc} : contient les fichiers de configuration du système
-    \item \textbf{/usr} (\textit{unix system ressources}) : ressources non nécessaires au démarrage contenant des programmes, documentation
-    \end{itemize}
- \end{frame}
- 
- \begin{frame}
-	\begin{itemize}
-    \item \textbf{/var} : répertoires des données variables (ex: logs)
-    \item \textbf{/home} : répertoires des utilisateurs
-    \item \textbf{/mnt} et \textbf{/media} : points de montages    
-    \item \textbf{/tmp} : données temporaires
-    \item \textbf{/proc} et \textbf{/sys} : systèmes de fichiers virtuels
-    \item \textbf{/dev} : fichiers spéciaux nommés \texttt{device} correspondants à des périphériques
-    \end{itemize}
-\end{frame}
 
 \begin{frame}
 \begin{center}
@@ -268,14 +287,7 @@ Les périphériques spéciaux
 \end{frame}
 
 
-\begin{frame}
-Organisation des partitions sous Linux
-\begin{itemize}
-\item assurer une meilleure résistance du système aux crash disques
-\item face aux attaques de tout types \textit{(ex: saturation de /home/abdou)}
-\item failles de sécurité \textit{(ex: \texttt{/tmp} accessible en écriture à tous les utilisateurs et programmes )}
-\end{itemize}
-\end{frame}
+
 
 \begin{frame}
 \textbf{Utiliser fdisk}
@@ -399,9 +411,9 @@ Ajout/suppresion de logiciels depuis\
 	\begin{itemize}
 	\item \textbf{/etc/apt/sources.list} : la configuration des dépôts
 	\item \textbf{aptitude update} : lecture des paquets disponibles dans les dépots 
-	\item \textbf{aptitude search \textit{motclef}}
-	\item \textbf{aptitude show \textit{paquet}}
-	\item \textbf{aptitude install \textit{paquet}} 
+	\item \textbf{aptitude search} \textit{motclef}
+	\item \textbf{aptitude show} \textit{paquet}
+	\item \textbf{aptitude install} \textit{paquet}
 	\item \textbf{aptitude safe-upgrade} et  \textbf{aptitude full-upgrade}
 	\item et aussi : \textit{dpkg -l}
 	\end{itemize}
@@ -422,13 +434,7 @@ Ajout/suppresion de logiciels depuis\
 NB : les autres dépots ne sont pas toujours dignes de confiance !
 \end{frame}
 
-\begin{frame}
-Un peu de lecture avant l'installation...
-\begin{itemize}
-\item Manuel d'installation : \url{http://www.debian.org/releases/stable/installmanual}
-\item Installation via le réseau : \url{http://www.debian.org/distrib/netinst}
-\end{itemize}
-\end{frame}
+
 
 
 
@@ -589,7 +595,7 @@ propriétaire
 propriétaire
 \item \texttt{3 caractères rwx} pour les permissions des \textbf{autres}
 \end{itemize}
-\texttt{Note: cp -p ou -a préserves les permissions et l'horodotage}
+\texttt{Note: cp -p ou -a préserve les permissions et l'horodotage}
 \end{frame}
 
 \begin{frame}
