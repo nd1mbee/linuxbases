@@ -45,7 +45,7 @@
 \item Améliorer les performances du système
 \item Intégrer de nouveaux services
 \item Veiller à la sécurité du système
-\item Paramétrer le démarrage et l'arrêt du système
+\item Automatiser les tâches systèmes répétitives
 \item Suivre les logs du système
 \end{itemize}
 \end{frame}
@@ -132,22 +132,24 @@ un support (disque, disquette, cd ...)
 \end{frame}
 
 \begin{frame}
-L'arborescence système :
+L'arborescence système : \url{http://www.pathname.com/fhs/}
     \begin{itemize}
-    \item \textbf{/} : répertoire racine doit contenir tout ce qui permet au système de démarrer
-    \item \textbf{/bin}, \textbf{/sbin} : contenant les exécutables de base (ex: cp, mv, ls)
-    \item \textbf{/lib} : bibliothèques associées 
-    \item \textbf{/etc} : contient les fichiers de configuration du système
-    \item \textbf{/usr} (\textit{unix system ressources}) : ressources non nécessaires au démarrage contenant des programmes, documentation
+    \item \textbf{/} : répertoire racine doit contenir tout ce qui permet au système de démarrer (1Go)
+    \item \textbf{/usr} (\textit{unix system ressources}) : ressources non nécessaires au démarrage contenant des programmes, documentation (2Go)
+    \item \textbf{/var} : répertoires des données variables (ex: logs, mail, spool, squid) (2go en fonction du serveur)
+    \item \textbf{/home} : répertoires des utilisateurs
+	\item \textbf{/tmp} : données temporaires (512Mo à 1Go)
+	\item \textbf{swap :} 1 Go  
     \end{itemize}
  \end{frame}
  
  \begin{frame}
+ L'arborescence système : \url{http://www.pathname.com/fhs/}
 	\begin{itemize}
-    \item \textbf{/var} : répertoires des données variables (ex: logs)
-    \item \textbf{/home} : répertoires des utilisateurs
-    \item \textbf{/mnt} et \textbf{/media} : points de montages    
-    \item \textbf{/tmp} : données temporaires
+	\item \textbf{/etc} : contient les fichiers de configuration du système
+	\item \textbf{/bin}, \textbf{/sbin} : contenant les exécutables de base (ex: cp, mv, ls)
+    \item \textbf{/lib} : bibliothèques associées 
+    \item \textbf{/mnt} et \textbf{/media} : points de montages       
     \item \textbf{/proc} et \textbf{/sys} : systèmes de fichiers virtuels
     \item \textbf{/dev} : fichiers spéciaux nommés \texttt{device} correspondants à des périphériques
     \end{itemize}
