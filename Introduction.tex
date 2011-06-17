@@ -75,7 +75,7 @@ Le système d'exploitation \textbf{GNU/Linux}:
 
 \begin{frame}
 \textbf{Distributions Linux} \\
-ensemble cohérent de logiciels assemblé autour du système d'exploitation
+ensemble cohérent de logiciels assemblés autour du système d'exploitation
 \texttt{GNU} et du noyau \texttt{Linux}
     \begin{itemize}
     \item Mandriva 
@@ -166,6 +166,7 @@ d'exploitation
     \item syntaxe: \textit{prompt\# [commande] [option(s)] [arguments]}
     \item exemple: \textit{ls -l /home}
     \end{itemize}
+NB:\textbf{Chemin absolue} \texttt{commence toujours par} \textit{"/"} contrairement au \textbf{chemin relatif}
 \end{frame}
 
 \begin{frame}
@@ -212,15 +213,12 @@ effectuent des traitements avant d'afficher un résultat en sortie.
 
 
 \begin{frame}
-\textbf{Redirections} \\
+\textbf{Redirections}: permet de changer la sortie ou l'entrée ou la sortie d'erreur \\
     \begin{itemize}
-    \item Entrée standard: descripteur \textbf{0}
-    \item Sortie standard: descripteur \textbf{1}
-    \item Sortie d'erreur standard: descripteur \textbf{2}
+    \item \texttt{echo 'Sortie standard'}
     \item \texttt{echo 'Bonjour Dakar' > hello.txt}
-    Sortie standard et sortie d'erreur redirigé vers un fichier
-    \item \texttt{tail /etc/passwd > fichiersortie 2>\&1 }
-    \item \texttt{tail /etc/passwd >\& fichiersortie 2>1 }
+    \item \texttt{tail /etc/rien 2> fichier_erreur}
+    \item \texttt{tail /etc/passwd >\& fichiersortie }
     \end{itemize}
 \end{frame}
 
